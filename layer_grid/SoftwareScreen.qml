@@ -67,8 +67,8 @@ FocusScope
 
         SequentialAnimation {
             id: na
-            ColorAnimation { target: sortButton; property: "color"; from: sortButton.color; to: theme.accent; duration: 150; easing.type: Easing.OutQuad }
-            ColorAnimation { target: sortButton; property: "color"; from: theme.accent; to: sortButton.color; duration: 150; easing.type: Easing.OutQuad }
+            ColorAnimation { target: sortButton; property: "color"; from: sortButton.color; to: theme.press; duration: 100; easing.type: Easing.OutQuad }
+            ColorAnimation { target: sortButton; property: "color"; from: theme.press; to: sortButton.color; duration: 200; easing.type: Easing.InQuad }
             }
 
         // Top bar
@@ -151,7 +151,7 @@ FocusScope
 
                     anchors {
                         left: sortIcon.right
-                        leftMargin: vpx(3); rightMargin: vpx(17)
+                        leftMargin: vpx(5); rightMargin: vpx(17)
                         verticalCenter: sortIcon.verticalCenter
                     }
 
@@ -199,14 +199,12 @@ FocusScope
                 cached: true
             }
 
-            
-
             MouseArea {
                 anchors.fill: headerIcon
                 hoverEnabled: true
                 onEntered: {}
                 onExited: {}
-                onClicked: showHomeScreen();
+                onClicked: {}
             }
 
             // Line
@@ -269,9 +267,9 @@ FocusScope
             cellHeight: cellWidth
             preferredHighlightBegin: Math.round(screenheight*0.1388)
             preferredHighlightEnd: Math.round(screenheight*0.6527)
-            highlightRangeMode: ListView.StrictlyEnforceRange // Highlight never moves outside the range
+            highlightRangeMode: ListView.ApplyRange//StrictlyEnforceRange // Highlight never moves outside the range
             snapMode: ListView.NoSnap
-            highlightMoveDuration: 150 //150 is default
+            highlightMoveDuration: 100//200 //150 is default
 
             
             model: softwareList[sortByIndex].games //api.collections.get(collectionIndex).games
@@ -307,10 +305,10 @@ FocusScope
                         height: parent.height
                         asynchronous: true
                         smooth: true
-                        source: gameBG//modelData.assets.screenshots[0] ? modelData.assets.screenshots[0] : ""
+                        source: modelData.collections.get(0).shortName === "steam" ? modelData.assets.screenshot : gameBG
                         sourceSize { width: 256; height: 256 }
                         fillMode: (gameBG == modelData.assets.boxFront) ? Image.PreserveAspectFit : Image.PreserveAspectCrop
-                        layer.enabled: false //FIXME: disabled because it blurs the gameImages. Can't figure out how to get it below the image instead of on top.
+                        layer.enabled: false //FIXME: disabled because it blurs the gameImages.
                         layer.effect: DropShadow {
                             transparentBorder: true
                             horizontalOffset: 0
@@ -368,17 +366,6 @@ FocusScope
                         visible: modelData.assets.logo && gameBG != modelData.assets.boxFront ? true : false
                         z:8
                     }
-
-                    /*DropShadow {
-                        id: logoshadow
-                        anchors.fill: logo
-                        horizontalOffset: 0
-                        verticalOffset: 2
-                        radius: 4.0
-                        samples: 6
-                        color: "#80000000"
-                        source: logo
-                    }*/
 
                     MouseArea {
                         anchors.fill: gameImage

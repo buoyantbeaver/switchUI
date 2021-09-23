@@ -20,7 +20,7 @@ ListView {
     preferredHighlightEnd: vpx(1077)
     highlightRangeMode: ListView.StrictlyEnforceRange // Highlight never moves outside the range
     snapMode: ListView.SnapToItem
-    highlightMoveDuration: 200
+    highlightMoveDuration: 100
     highlightMoveVelocity: -1
     keyNavigationWraps: true
     
@@ -92,7 +92,7 @@ ListView {
                 height: width
                 smooth: true
                 fillMode: (gameBG == gameData.assets.boxFront) ? Image.PreserveAspectFit : Image.PreserveAspectCrop
-                source: gameBG //gameData ? gameData.assets.background || gameData.assets.screenshots[0] || "" : ""
+                source: gameData.collections.get(0).shortName === "steam" ? gameData.assets.screenshot : gameBG
                 asynchronous: true
                 sourceSize { width: 512; height: 512 }
                 
@@ -123,6 +123,8 @@ ListView {
                             return Utils.logo(gameData) ? Utils.logo(gameData) : "" //root.logo(gameData);
                         else if (gameData.assets.tile != "")
                             return "";
+                        else if (gameBG == gameData.assets.boxFront)
+                            return "";
                         else
                             return gameData.assets.logo;
                     } else {
@@ -135,8 +137,7 @@ ListView {
                 fillMode: Image.PreserveAspectFit
                 asynchronous: true
                 smooth: true
-                z: 10
-                visible: isGame && !(gameBG == gameData.assets.boxFront) ? true : false
+                // z: 10
             }
 
             ColorOverlay {
@@ -145,6 +146,7 @@ ListView {
                 color: theme.icon
                 antialiasing: true
                 cached: true
+                visible: !isGame
             }
 
 
@@ -258,7 +260,6 @@ ListView {
 
     function gotoSoftware()
     {
-            jumpToCollection(currentCollection);
             showSoftwareScreen();
     }
 
