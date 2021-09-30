@@ -7,7 +7,7 @@ import QtMultimedia 5.9
 import QtGraphicalEffects 1.12
 import "qrc:/qmlutils" as PegasusUtils
 import "utils.js" as Utils
-import "layer_platform"
+import "layer_home"
 import "layer_grid"
 import "layer_settings"
 import "layer_help"
@@ -34,12 +34,13 @@ FocusScope
     ListLastPlayed  { id: listRecent; max: softCount}
     ListLastPlayed  { id: listByLastPlayed}
     ListMostPlayed  { id: listByMostPlayed}
+    ListPublisher   { id: listByPublisher}
     ListAllGames    { id: listByTitle}
 
     property int currentCollection: api.memory.has('Last Collection') ? api.memory.get('Last Collection') : -1
     property int nextCollection: api.memory.has('Last Collection') ? api.memory.get('Last Collection') : -1
     property var currentGame
-    property var softwareList: [listByLastPlayed, listByTitle, listByMostPlayed]
+    property var softwareList: [listByLastPlayed, listByMostPlayed, listByTitle, listByPublisher]
     property int sortByIndex: api.memory.has('sortIndex') ? api.memory.get('sortIndex') : 0
     property string searchtext
     property bool wordWrap: (settings.wordWrap === "Yes") ? true : false;
@@ -67,7 +68,7 @@ FocusScope
 
     function showSoftwareScreen()
     {
-        /*platformScreen.visible = false;
+        /*homeScreen.visible = false;
         softwareScreen.visible = true;*/
         softwareScreen.focus = true;
         toSoftware.play();
@@ -81,7 +82,7 @@ FocusScope
 
     function showHomeScreen()
     {
-        platformScreen.focus = true;
+        homeScreen.focus = true;
         homeSfx.play()
     }
 
@@ -99,7 +100,7 @@ FocusScope
         launchSfx.play()
     }
 
-    // Launch the current game from PlatformBar
+    // Launch the current game from HomeBar
     function launchGame(game) {
         api.memory.set('Last Collection', currentCollection);
         if (game != null)
@@ -157,7 +158,7 @@ FocusScope
     // State settings
     states: [
         State {
-            name: "platformscreen"; when: platformScreen.focus == true
+            name: "homescreen"; when: homeScreen.focus == true
         },
         State {
             name: "softwarescreen"; when: softwareScreen.focus == true
@@ -177,45 +178,45 @@ FocusScope
 
     transitions: [
         Transition {
-            from: "platformscreen"; to: "softwarescreen"
+            from: "homescreen"; to: "softwarescreen"
             SequentialAnimation {
-                PropertyAnimation { target: platformScreen; property: "opacity"; to: 0; duration: 200}
-                PropertyAction { target: platformScreen; property: "visible"; value: false }
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: homeScreen; property: "visible"; value: false }
                 PropertyAction { target: softwareScreen; property: "visible"; value: true }
                 PropertyAnimation { target: softwareScreen; property: "opacity"; to: 1; duration: 200}
             }
         },
         Transition {
-            from: "platformscreen"; to: "settingsscreen"
+            from: "homescreen"; to: "settingsscreen"
             SequentialAnimation {
-                PropertyAnimation { target: platformScreen; property: "opacity"; to: 0; duration: 200}
-                PropertyAction { target: platformScreen; property: "visible"; value: false }
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: homeScreen; property: "visible"; value: false }
                 PropertyAction { target: settingsScreen; property: "visible"; value: true }
                 PropertyAnimation { target: settingsScreen; property: "opacity"; to: 1; duration: 200}
             }
         },
         Transition {
-            from: "softwarescreen"; to: "platformscreen"
+            from: "softwarescreen"; to: "homescreen"
             SequentialAnimation {
                 PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 200}
                 PropertyAction { target: softwareScreen; property: "visible"; value: false }
-                PropertyAction { target: platformScreen; property: "visible"; value: true }
-                PropertyAnimation { target: platformScreen; property: "opacity"; to: 1; duration: 200}
+                PropertyAction { target: homeScreen; property: "visible"; value: true }
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
             }
         },
         Transition {
-            from: "settingsscreen"; to: "platformscreen"
+            from: "settingsscreen"; to: "homescreen"
             SequentialAnimation {
                 PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 200}
                 PropertyAction { target: settingsScreen; property: "visible"; value: false }
-                PropertyAction { target: platformScreen; property: "visible"; value: true }
-                PropertyAnimation { target: platformScreen; property: "opacity"; to: 1; duration: 200}
+                PropertyAction { target: homeScreen; property: "visible"; value: true }
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
             }
         },
         Transition {
             to: "playgame"
             SequentialAnimation {
-                PropertyAnimation { target: platformScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
                 PauseAnimation { duration: 200 }
                 ScriptAction { script: launchGame(currentGame) }
             }
@@ -229,10 +230,10 @@ FocusScope
             }
         },
         Transition {
-            from: ""; to: "platformscreen"
+            from: ""; to: "homescreen"
             ParallelAnimation {
-                NumberAnimation { target: platformScreen; property: "scale"; from: 1.2; to: 1.0; duration: 200; easing.type: Easing.OutQuad }
-                NumberAnimation { target: platformScreen; property: "opacity"; from: 0; to: 1; duration: 200 }
+                NumberAnimation { target: homeScreen; property: "scale"; from: 1.2; to: 1.0; duration: 200; easing.type: Easing.OutQuad }
+                NumberAnimation { target: homeScreen; property: "opacity"; from: 0; to: 1; duration: 200 }
             }
         }
     ]
@@ -251,17 +252,17 @@ FocusScope
 
     //starting collection is set here
     Component.onCompleted: {
-        state: "platformscreen"
+        state: "homescreen"
         currentCollection = api.memory.has('Last Collection') ? api.memory.get('Last Collection') : -1 
         api.memory.unset('Last Collection');
         homeSfx.play()
     }
 
 
-    // Platform screen
-    PlatformScreen
+    // Home screen
+    HomeScreen
     {
-        id: platformScreen
+        id: homeScreen
         focus: true
         anchors
         {
@@ -369,7 +370,7 @@ FocusScope
             anchors {
                 bottom: parent.bottom;
             }
-            showBack: !platformScreen.focus
+            showBack: !homeScreen.focus
             showCollControls: !settingsScreen.focus
         }
 

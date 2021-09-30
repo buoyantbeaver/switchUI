@@ -17,9 +17,11 @@ FocusScope
             case 0:
                 return "By Time Last Played";
             case 1:
-                return "By Title";
-            case 2:
                 return "By Total Play Time";
+            case 2:
+                return "By Title";
+            case 3:
+                return "By Publisher";
             default:
                 return ""
         }
@@ -112,7 +114,6 @@ FocusScope
 
 
             // Nintendo's Sort Options: "By Time Last Played", "By Total Play Time", "By Title", "By Publisher"
-            // Probably won't do "By Publisher"
             Rectangle {
                 id: sortButton
 
@@ -129,7 +130,7 @@ FocusScope
                     id: sortIcon
                     width: Math.round(screenheight*0.04)
                     height: width
-                    source: "../assets/images/controller/"+ processButtonArt(api.keys.filters) + ".png"
+                    source: "../assets/images/navigation/"+ processButtonArt(api.keys.filters) + ".png"
                     sourceSize.width: 64
                     sourceSize.height: 64
                     anchors {
@@ -229,7 +230,7 @@ FocusScope
         }
         
         // Game grid
-        GridView 
+        GridView
         {
             id: gameGrid
             focus: true
@@ -273,7 +274,7 @@ FocusScope
 
             
             model: softwareList[sortByIndex].games //api.collections.get(collectionIndex).games
-            delegate: gameGridDelegate            
+            delegate: gameGridDelegate
 
             Component 
             {
@@ -283,6 +284,12 @@ FocusScope
                 {
                     id: delegateContainer
                     property bool selected: delegateContainer.GridView.isCurrentItem
+                    onSelectedChanged: { if (selected) updateData() }
+
+                    function updateData() {
+                        currentGame = modelData;
+                    }
+
                     width: gameGrid.cellWidth - vpx(10)
                     height: width
                     z: selected ? 10 : 0
@@ -308,15 +315,15 @@ FocusScope
                         source: modelData.collections.get(0).shortName === "steam" ? modelData.assets.screenshot : gameBG
                         sourceSize { width: 256; height: 256 }
                         fillMode: (gameBG == modelData.assets.boxFront) ? Image.PreserveAspectFit : Image.PreserveAspectCrop
-                        layer.enabled: false //FIXME: disabled because it blurs the gameImages.
+                        layer.enabled: enableDropShadows //FIXME: disabled because it blurs the gameImages.
                         layer.effect: DropShadow {
                             transparentBorder: true
                             horizontalOffset: 0
-                            verticalOffset: 2
+                            verticalOffset: 0
                             color: "#1F000000"
-                            radius: 6.0
+                            radius: 3.0
                             samples: 6
-                            z: -2
+                            z: -200
                         }
                     }
 
@@ -446,7 +453,7 @@ FocusScope
 
                         Text {
                             id: gameTitle
-                            text: modelData.title
+                            text: sortByIndex == 3 ? modelData.publisher + " / " + modelData.title : modelData.title
                             color: theme.accent
                             font.pixelSize: Math.round(screenheight*0.0222)
                             font.bold: true

@@ -1,11 +1,19 @@
 import QtQuick 2.8
 import QtQuick.Layouts 1.11
 import QtGraphicalEffects 1.0
+import "../utils.js" as Utils
 
 FocusScope {
   id: root
   property bool showBack: true
   property bool showCollControls: true
+  property var gameData: softwareList[sortByIndex].currentGame(currentScreenID)
+  property string collectionShortName: {
+    if (currentCollection == -1)
+      Utils.processPlatformName(currentGame.collections.get(0).shortName)
+    else
+      Utils.processPlatformName(api.collections.get(currentCollection).shortName)
+  }
 
   function processButtonArt(buttonModel) {
     var i;
@@ -23,7 +31,31 @@ FocusScope {
     width: parent.width
     height: parent.height
 
-    Behavior on opacity { NumberAnimation { duration: 200 } }
+    Behavior on opacity { NumberAnimation { duration: 200 }}
+
+    Image {
+      id: controllerIcon
+      width: vpx(80)
+      height: vpx(70)
+      horizontalAlignment: Image.AlignLeft
+      fillMode: Image.PreserveAspectFit
+      source: "../assets/images/controllers/" + collectionShortName + ".svg"
+      visible: false
+
+      anchors {
+        verticalCenter: parent.verticalCenter
+        left: parent.left
+        leftMargin: vpx(25)
+      }
+    }
+
+    ColorOverlay {
+      anchors.fill: controllerIcon
+      source: controllerIcon
+      color: theme.text
+      smooth: true
+      cached: true
+    }
 
     RowLayout {
       anchors {
@@ -39,7 +71,7 @@ FocusScope {
         button: processButtonArt(api.keys.accept)
         label: 'OK'
         Layout.fillWidth: true
-        Layout.minimumWidth: vpx(60)
+        Layout.minimumWidth: vpx(65)
 
         //onClicked: {console.log("OK Clicked!")}
 
@@ -62,7 +94,7 @@ FocusScope {
         button: processButtonArt(api.keys.nextPage)
         label: 'Next Collection'
         Layout.fillWidth: true
-        Layout.minimumWidth: vpx(175)
+        Layout.minimumWidth: vpx(185)
 
         onClicked: {
           turnOnSfx.play();
@@ -82,7 +114,7 @@ FocusScope {
         button: processButtonArt(api.keys.prevPage)
         label: 'Prev Collection'
         Layout.fillWidth: true
-        Layout.minimumWidth: vpx(160)
+        Layout.minimumWidth: vpx(170)
 
         onClicked: {
           turnOffSfx.play();
@@ -97,6 +129,31 @@ FocusScope {
       }
 
     }
+
+    // Image{
+    //   id: profileIcon
+    //   anchors
+    //   {
+    //       top: parent.top;
+    //       left: parent.left;
+    //   }
+    //   width: Math.round(screenheight * 0.0833)
+    //   height: width
+    //   source: "../assets/images/logos/Nintendo - Switch.png"
+    //   sourceSize { width: 128; height:128 }
+    //   smooth: true
+    //   antialiasing: true
+    //   layer.enabled: enableDropShadows
+    //   layer.effect: DropShadow {
+    //       transparentBorder: true
+    //       horizontalOffset: 0
+    //       verticalOffset: 0
+    //       color: "#1F000000"
+    //       radius: 3.0
+    //       samples: 6
+    //       z: -2
+    //   }
+    // }
 
     
 
