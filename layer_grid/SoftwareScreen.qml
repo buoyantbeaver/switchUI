@@ -9,7 +9,7 @@ import "qrc:/qmlutils" as PegasusUtils
 FocusScope
 {
 
-    property int numcolumns: widescreen ? 6 : 3
+    property int numcolumns: widescreen ? 6 : 5
     property int idx: 0
     // "By Time Last Played" "By Title" "By Total Play Time"
     property var sortTitle: {
