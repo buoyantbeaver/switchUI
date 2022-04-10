@@ -61,9 +61,8 @@ FocusScope {
       anchors {
         verticalCenter: parent.verticalCenter
         right: parent.right
-        rightMargin: vpx(25)
       }
-      spacing: vpx(15)
+      spacing: vpx(25)
       layoutDirection: Qt.RightToLeft
 
       ControllerHelpButton {
@@ -71,7 +70,8 @@ FocusScope {
         button: processButtonArt(api.keys.accept)
         label: 'OK'
         Layout.fillWidth: true
-        Layout.minimumWidth: vpx(65)
+        Layout.minimumWidth: vpx(50)
+        Layout.preferredWidth: vpx(60)
 
         //onClicked: {console.log("OK Clicked!")}
 
@@ -82,7 +82,8 @@ FocusScope {
         button: processButtonArt(api.keys.cancel)
         label: 'Back'
         Layout.fillWidth: true
-        Layout.minimumWidth: vpx(75)
+        Layout.minimumWidth: vpx(50)
+        Layout.preferredWidth: vpx(75)
 
         onClicked: { showHomeScreen(); }
 
@@ -94,7 +95,8 @@ FocusScope {
         button: processButtonArt(api.keys.nextPage)
         label: 'Next Collection'
         Layout.fillWidth: true
-        Layout.minimumWidth: vpx(185)
+        Layout.minimumWidth: vpx(175)
+        Layout.preferredWidth: widescreen ? vpx(175) : vpx(212)
 
         onClicked: {
           turnOnSfx.play();
@@ -114,7 +116,8 @@ FocusScope {
         button: processButtonArt(api.keys.prevPage)
         label: 'Prev Collection'
         Layout.fillWidth: true
-        Layout.minimumWidth: vpx(170)
+        Layout.minimumWidth: vpx(130)
+        Layout.preferredWidth: vpx(175)
 
         onClicked: {
           turnOffSfx.play();
