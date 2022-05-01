@@ -65,7 +65,28 @@ FocusScope
                 cycleSort();
                 return;
             }
-        }
+            // Cycle collection forward
+            if (api.keys.isNextPage(event) && !event.isAutoRepeat) {
+                event.accepted = true;
+                turnOnSfx.play();
+                if (currentCollection < api.collections.count-1) {
+                    nextCollection++;
+                } else {
+                    nextCollection = -1;
+                }
+            }
+
+            // Cycle collection back
+            if (api.keys.isPrevPage(event) && !event.isAutoRepeat) {
+                event.accepted = true;
+                turnOffSfx.play();
+                if (currentCollection == -1) {
+                    nextCollection = api.collections.count-1;
+                } else{ 
+                    nextCollection--;
+                }
+            }
+            }
 
         SequentialAnimation {
             id: na

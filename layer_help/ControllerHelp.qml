@@ -6,14 +6,9 @@ import "../utils.js" as Utils
 FocusScope {
   id: root
   property bool showBack: true
-  property bool showCollControls: true
+  property bool showCollControls: false
   property var gameData: softwareList[sortByIndex].currentGame(currentScreenID)
-  property string collectionShortName: {
-    if (currentCollection == -1)
-      Utils.processPlatformName(currentGame.collections.get(0).shortName)
-    else
-      Utils.processPlatformName(api.collections.get(currentCollection).shortName)
-  }
+  property string collectionShortName: Utils.processPlatformName(currentGame.collections.get(0).shortName)
 
   function processButtonArt(buttonModel) {
     var i;
@@ -39,7 +34,7 @@ FocusScope {
       height: vpx(70)
       horizontalAlignment: Image.AlignLeft
       fillMode: Image.PreserveAspectFit
-      source: "../assets/images/controllers/" + collectionShortName + ".svg"
+      source: collectionShortName ? "../assets/images/controllers/" + collectionShortName + ".svg" : "../assets/images/controllers/switch.svg"
       visible: false
 
       anchors {
