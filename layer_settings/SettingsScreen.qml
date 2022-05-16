@@ -15,10 +15,17 @@ id: root
         }
 
         ListElement {
+            settingName: "Background Music"
+            settingSubtitle: "(Requires Reload)"
+            setting: "No,Yes"
+        }
+
+        ListElement {
             settingName: "Word Wrap on Titles"
             settingSubtitle: "(Requires Reload)"
             setting: "Yes,No"
         }
+        
 
     }
 

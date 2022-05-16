@@ -12,6 +12,7 @@ import "layer_grid"
 import "layer_settings"
 import "layer_help"
 import "Lists"
+import "resources" as Resources
 
 FocusScope
 {
@@ -24,7 +25,8 @@ FocusScope
             timeFormat:             api.memory.has("Time Format") ? api.memory.get("Time Format") : "12hr",
             wordWrap:               api.memory.has("Word Wrap on Titles") ? api.memory.get("Word Wrap on Titles") : "Yes",
             batteryPercentSetting:  api.memory.has("Display Battery Percentage") ? api.memory.get("Display Battery Percentage") : "No",
-            enableDropShadows:      api.memory.has("Enable DropShadows") ? api.memory.get("Enable DropShadows") : "Yes"
+            enableDropShadows:      api.memory.has("Enable DropShadows") ? api.memory.get("Enable DropShadows") : "Yes",
+            playBGM:                api.memory.has("Background Music") ? api.memory.get("Background Music"): "No"
         }
     }
 
@@ -36,6 +38,7 @@ FocusScope
     ListMostPlayed  { id: listByMostPlayed}
     ListPublisher   { id: listByPublisher}
     ListAllGames    { id: listByTitle}
+    Resources.Music { id: music}
 
     property int currentCollection: api.memory.has('Last Collection') ? api.memory.get('Last Collection') : -1
     property int nextCollection: api.memory.has('Last Collection') ? api.memory.get('Last Collection') : -1
@@ -45,7 +48,8 @@ FocusScope
     property string searchtext
     property bool wordWrap: (settings.wordWrap === "Yes") ? true : false;
     property bool showPercent: (settings.batteryPercentSetting === "Yes") ? true : false;
-    property bool enableDropShadows: (settings.enableDropShadows === "Yes") ? true: false; 
+    property bool enableDropShadows: (settings.enableDropShadows === "Yes") ? true: false;
+    property bool playBGM: (settings.playBGM === "Yes") ? true : false;
 
     onNextCollectionChanged: { changeCollection() }
 
@@ -83,6 +87,7 @@ FocusScope
     function showHomeScreen()
     {
         homeScreen.focus = true;
+        currentCollection = -1
         homeSfx.play()
     }
 
@@ -253,7 +258,7 @@ FocusScope
     //starting collection is set here
     Component.onCompleted: {
         state: "homescreen"
-        currentCollection = api.memory.has('Last Collection') ? api.memory.get('Last Collection') : -1 
+        currentCollection = -1 
         api.memory.unset('Last Collection');
         homeSfx.play()
     }
@@ -272,35 +277,13 @@ FocusScope
     }
 
     // List specific input
-    Keys.onPressed: {
+    /*Keys.onPressed: {
         // disabled
         /*if (api.keys.isFilters(event) && !event.isAutoRepeat) {
             event.accepted = true;
             toggleDarkMode();
-        }*/
-
-        // Cycle collection forward
-        if (api.keys.isNextPage(event) && !event.isAutoRepeat) {
-            event.accepted = true;
-            turnOnSfx.play();
-            if (currentCollection < api.collections.count-1) {
-                nextCollection++;
-            } else {
-                nextCollection = -1;
-            }
         }
-
-        // Cycle collection back
-        if (api.keys.isPrevPage(event) && !event.isAutoRepeat) {
-            event.accepted = true;
-            turnOffSfx.play();
-            if (currentCollection == -1) {
-                nextCollection = api.collections.count-1;
-            } else{ 
-                nextCollection--;
-            }
-        }
-    }
+    }*/
 
     SettingsScreen {
         id: settingsScreen
@@ -371,7 +354,7 @@ FocusScope
                 bottom: parent.bottom;
             }
             showBack: !homeScreen.focus
-            showCollControls: !settingsScreen.focus
+            showCollControls: softwareScreen.focus
         }
 
     }
