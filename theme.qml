@@ -12,6 +12,7 @@ import "layer_grid"
 import "layer_settings"
 import "layer_help"
 import "Lists"
+import "resources" as Resources
 
 FocusScope
 {
@@ -24,7 +25,8 @@ FocusScope
             timeFormat:             api.memory.has("Time Format") ? api.memory.get("Time Format") : "12hr",
             wordWrap:               api.memory.has("Word Wrap on Titles") ? api.memory.get("Word Wrap on Titles") : "Yes",
             batteryPercentSetting:  api.memory.has("Display Battery Percentage") ? api.memory.get("Display Battery Percentage") : "No",
-            enableDropShadows:      api.memory.has("Enable DropShadows") ? api.memory.get("Enable DropShadows") : "Yes"
+            enableDropShadows:      api.memory.has("Enable DropShadows") ? api.memory.get("Enable DropShadows") : "Yes",
+            playBGM:                api.memory.has("Background Music") ? api.memory.get("Background Music"): "No"
         }
     }
 
@@ -36,6 +38,7 @@ FocusScope
     ListMostPlayed  { id: listByMostPlayed}
     ListPublisher   { id: listByPublisher}
     ListAllGames    { id: listByTitle}
+    Resources.Music { id: music}
 
     property int currentCollection: api.memory.has('Last Collection') ? api.memory.get('Last Collection') : -1
     property int nextCollection: api.memory.has('Last Collection') ? api.memory.get('Last Collection') : -1
@@ -45,7 +48,8 @@ FocusScope
     property string searchtext
     property bool wordWrap: (settings.wordWrap === "Yes") ? true : false;
     property bool showPercent: (settings.batteryPercentSetting === "Yes") ? true : false;
-    property bool enableDropShadows: (settings.enableDropShadows === "Yes") ? true: false; 
+    property bool enableDropShadows: (settings.enableDropShadows === "Yes") ? true: false;
+    property bool playBGM: (settings.playBGM === "Yes") ? true : false;
 
     onNextCollectionChanged: { changeCollection() }
 
