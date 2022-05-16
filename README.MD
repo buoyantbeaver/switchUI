@@ -14,6 +14,12 @@ See [wiki](https://github.com/RBertoCases/skylineOS/wiki) for more information.
 
 ## Version history
 
+v0.14
+
+- Removed collection controls from homescreen
+- Added ability to play background music (See wiki for instructions)
+- General system stability improvements have been made to enhance the user's experience
+
 v0.13.2
 
 - Adjusted ControllerHelpButton spacing for 4x3 resolutions like on RP2
