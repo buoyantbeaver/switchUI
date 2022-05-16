@@ -17,7 +17,7 @@ See [wiki](https://github.com/RBertoCases/skylineOS/wiki) for more information.
 v0.14
 
 - Removed collection controls from homescreen
-- Added ability to play background music (See wiki for instructions)
+- Added ability to play background music (See wiki for instructions) Courtesy of [Plaidman](https://github.com/plaidman/retromega-next)
 - General system stability improvements have been made to enhance the user's experience
 
 v0.13.2
