@@ -26,12 +26,13 @@ FocusScope
             wordWrap:               api.memory.has("Word Wrap on Titles") ? api.memory.get("Word Wrap on Titles") : "Yes",
             batteryPercentSetting:  api.memory.has("Display Battery Percentage") ? api.memory.get("Display Battery Percentage") : "No",
             enableDropShadows:      api.memory.has("Enable DropShadows") ? api.memory.get("Enable DropShadows") : "Yes",
-            playBGM:                api.memory.has("Background Music") ? api.memory.get("Background Music"): "No"
+            playBGM:                api.memory.has("Background Music") ? api.memory.get("Background Music"): "No",
+            softCount:              api.memory.has("Number of recent games") ? api.memory.get("Number of recent games"): 12,
         }
     }
 
     // number of games that appear on the homescreen, not including the All Software button
-    property int softCount: 12
+    property int softCount: settings.softCount
 
     ListLastPlayed  { id: listRecent; max: softCount}
     ListLastPlayed  { id: listByLastPlayed}

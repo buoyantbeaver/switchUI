@@ -48,6 +48,11 @@ id: root
             settingSubtitle: "(%)"
             setting: "No,Yes"
         }
+        ListElement {
+            settingName: "Number of recent games"
+            settingSubtitle: "(default 12)"
+            setting: "8,10,12,14,16,18,20"
+        }
     }
 
     property var homePage: {
