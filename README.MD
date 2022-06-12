@@ -14,6 +14,12 @@ See [wiki](https://github.com/RBertoCases/skylineOS/wiki) for more information.
 
 ## Version history
 
+v0.15
+- Moved "All Software" button to the bottom bar
+- Added "Favorites" to the bottom bar
+- Added quick "Fav" toggle button
+- Added "Number of recent games" to the Settings
+
 v0.14
 
 - Removed collection controls from homescreen

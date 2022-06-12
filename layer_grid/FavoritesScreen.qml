@@ -52,6 +52,13 @@ FocusScope
 
             if (api.keys.isDetails(event)) {
                 event.accepted = true;
+                if (currentGame.favorite){
+                    turnOffSfx.play();
+                }
+                else {
+                    turnOnSfx.play();
+                }
+                currentGame.favorite = !currentGame.favorite
                 return;
             }
             if (api.keys.isCancel(event)) {

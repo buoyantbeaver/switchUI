@@ -63,13 +63,22 @@ FocusScope {
       ControllerHelpButton {
         id: buttonOK
         button: processButtonArt(api.keys.accept)
-        label: 'OK'
+        label: 'Ok'
         Layout.fillWidth: true
         Layout.minimumWidth: vpx(50)
         Layout.preferredWidth: vpx(60)
 
         //onClicked: {console.log("OK Clicked!")}
 
+      }
+      
+      ControllerHelpButton {
+        id: buttonFavorite
+        button: "10" // processButtonArt(api.keys.details)
+        label: 'Fav'
+        Layout.fillWidth: true
+        Layout.minimumWidth: vpx(50)
+        Layout.preferredWidth: vpx(60)
       }
 
       ControllerHelpButton {

@@ -275,6 +275,18 @@ ListView {
                 playGame();//launchGame(currentGame);
             }
         }
+        
+        if (api.keys.isDetails(event)) {
+            event.accepted = true;
+            if (currentGame.favorite){
+                turnOffSfx.play();
+            }
+            else {
+                turnOnSfx.play();
+            }
+            currentGame.favorite = !currentGame.favorite
+            return;
+        }
     }
 }
 
