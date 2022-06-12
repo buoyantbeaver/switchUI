@@ -296,10 +296,46 @@ FocusScope
             }
 
             x: parent.width/2 - buttonMenu.width/2
+            
+            MenuButton {
+                id: allSoftwareButton
+                width: vpx(86); height: vpx(100)
+                label: "All Software"
+                icon: "../assets/images/allsoft_icon.svg"
+
+                Keys.onPressed: {
+                    if (api.keys.isAccept(event) && !event.isAutoRepeat) {
+                        event.accepted = true;
+                        selectSfx.play();
+                        showSoftwareScreen();
+                    }
+                }
+
+                Keys.onLeftPressed:{
+                    borderSfx.play();
+                }
+
+                Keys.onRightPressed:{
+                    navSound.play();
+                    themeButton.focus = true
+                }
+
+                onClicked: {
+                    if (allSoftwareButton.focus)
+                    {
+                        selectSfx.play();
+                        showSoftwareScreen();
+                    }
+                    else
+                        allSoftwareButton.focus = true;
+                        navSound.play();
+                        homeSwitcher.currentIndex = -1;
+                }
+            }
 
             MenuButton {
                 id: themeButton
-                width: vpx(86); height: vpx(86)
+                width: vpx(86); height: vpx(100)
                 label: "Toggle Theme"
                 icon: "../assets/images/navigation/theme.svg"
 
@@ -312,7 +348,8 @@ FocusScope
                 }
 
                 Keys.onLeftPressed:{
-                    borderSfx.play();
+                    navSound.play();
+                    allSoftwareButton.focus = true
                 }
 
                 Keys.onRightPressed:{
@@ -335,7 +372,7 @@ FocusScope
 
             MenuButton {
                 id: settingsButton
-                width: vpx(86); height: vpx(86)
+                width: vpx(86); height: vpx(100)
                 label: "Theme Settings"
                 icon: "../assets/images/navigation/Settings.png"
 
