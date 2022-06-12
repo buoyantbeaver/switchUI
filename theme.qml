@@ -37,6 +37,7 @@ FocusScope
     ListLastPlayed  { id: listByLastPlayed}
     ListMostPlayed  { id: listByMostPlayed}
     ListPublisher   { id: listByPublisher}
+    ListFavorites   { id: listFavorites}
     ListAllGames    { id: listByTitle}
     Resources.Music { id: music}
 
@@ -75,6 +76,12 @@ FocusScope
         /*homeScreen.visible = false;
         softwareScreen.visible = true;*/
         softwareScreen.focus = true;
+        toSoftware.play();
+    }
+    
+    function showFavoritesScreen()
+    {
+        favoritesScreen.focus = true;
         toSoftware.play();
     }
 
@@ -166,6 +173,9 @@ FocusScope
             name: "homescreen"; when: homeScreen.focus == true
         },
         State {
+            name: "favoritesscreen"; when: favoritesScreen.focus == true
+        },
+        State {
             name: "softwarescreen"; when: softwareScreen.focus == true
         },
         State {
@@ -183,6 +193,15 @@ FocusScope
 
     transitions: [
         Transition {
+            from: "homescreen"; to: "favoritesscreen"
+            SequentialAnimation {
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAction { target: favoritesScreen; property: "visible"; value: true }
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 1; duration: 200}
+            }
+        },
+        Transition {
             from: "homescreen"; to: "softwarescreen"
             SequentialAnimation {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
@@ -198,6 +217,15 @@ FocusScope
                 PropertyAction { target: homeScreen; property: "visible"; value: false }
                 PropertyAction { target: settingsScreen; property: "visible"; value: true }
                 PropertyAnimation { target: settingsScreen; property: "opacity"; to: 1; duration: 200}
+            }
+        },
+        Transition {
+            from: "favoritesscreen"; to: "homescreen"
+            SequentialAnimation {
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: favoritesScreen; property: "visible"; value: false }
+                PropertyAction { target: homeScreen; property: "visible"; value: true }
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
             }
         },
         Transition {
@@ -293,6 +321,19 @@ FocusScope
         {
             left: parent.left; leftMargin: screenmargin
             right: parent.right; rightMargin: screenmargin
+            top: parent.top; bottom: helpBar.top
+        }
+    }
+    
+    // Favorites screen
+    FavoritesScreen {
+        id: favoritesScreen
+        opacity: 0
+        visible: false
+        anchors
+        {
+            left: parent.left;// leftMargin: screenmargin
+            right: parent.right;// rightMargin: screenmargin
             top: parent.top; bottom: helpBar.top
         }
     }

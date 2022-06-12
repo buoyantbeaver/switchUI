@@ -41,12 +41,12 @@ FocusScope
                 "icon":         "assets/images/navigation/Top Rated.png",
                 "background":   ""
             })//*/
-            append({
+            /*append({
                 "name":         "All Software",
                 "idx":          -3,
                 "icon":         "../assets/images/allsoft_icon.svg",
                 "background":   ""
-            })
+            })*/
         }
 
         function createListElement(i) {
@@ -317,7 +317,7 @@ FocusScope
 
                 Keys.onRightPressed:{
                     navSound.play();
-                    themeButton.focus = true
+                    favoriteButton.focus = true
                 }
 
                 onClicked: {
@@ -328,6 +328,43 @@ FocusScope
                     }
                     else
                         allSoftwareButton.focus = true;
+                        navSound.play();
+                        homeSwitcher.currentIndex = -1;
+                }
+            }
+            
+            MenuButton {
+                id: favoriteButton
+                width: vpx(86); height: vpx(100)
+                label: "Favorites"
+                icon: "../assets/images/favorites.png"
+
+                Keys.onPressed: {
+                    if (api.keys.isAccept(event) && !event.isAutoRepeat) {
+                        event.accepted = true;
+                        selectSfx.play();
+                        showFavoritesScreen();
+                    }
+                }
+
+                Keys.onLeftPressed:{
+                    navSound.play();
+                    allSoftwareButton.focus = true
+                }
+
+                Keys.onRightPressed:{
+                    navSound.play();
+                    themeButton.focus = true
+                }
+
+                onClicked: {
+                    if (favoriteButton.focus)
+                    {
+                        selectSfx.play();
+                        showFavoritesScreen();
+                    }
+                    else
+                        favoriteButton.focus = true;
                         navSound.play();
                         homeSwitcher.currentIndex = -1;
                 }
@@ -349,7 +386,7 @@ FocusScope
 
                 Keys.onLeftPressed:{
                     navSound.play();
-                    allSoftwareButton.focus = true
+                    favoriteButton.focus = true
                 }
 
                 Keys.onRightPressed:{
