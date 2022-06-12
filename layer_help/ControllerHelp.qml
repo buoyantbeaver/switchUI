@@ -74,7 +74,7 @@ FocusScope {
       
       ControllerHelpButton {
         id: buttonFavorite
-        button: "10" // processButtonArt(api.keys.details)
+        button: "3" // processButtonArt(api.keys.details)
         label: 'Fav'
         Layout.fillWidth: true
         Layout.minimumWidth: vpx(50)
