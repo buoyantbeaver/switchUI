@@ -81,6 +81,8 @@ ListView {
                         return gameData ? gameData.assets.tile || gameData.assets.screenshots[0] || gameData.assets.background || gameData.assets.boxFront || "" : "";
                     case "Fanart":
                         return gameData ? gameData.assets.tile || gameData.assets.background || gameData.assets.screenshots[0] || gameData.assets.boxFront || "" : "";
+                    case "Boxart":
+                        return gameData ? gameData.assets.tile || gameData.assets.boxFront || gameData.assets.screenshots[0] || gameData.assets.background || "" : "";
                     default:
                         return ""
                 }
@@ -98,6 +100,24 @@ ListView {
                 
                 anchors.centerIn: parent
                 
+                Rectangle {
+                    id: favicon
+                    anchors { 
+                        right: parent.right; rightMargin: vpx(5); 
+                        top: parent.top; topMargin: vpx(5) 
+                    }
+                    width: vpx(24)
+                    height: width
+                    radius: width/2
+                    color: theme.accent
+                    visible: gameData.favorite
+                    Image {
+                        source: "../assets/images/Favorites.png"
+                        asynchronous: true
+                        anchors.fill: parent
+                        anchors.margins: vpx(4)            
+                    }
+                }
             }
 
             //white overlay on screenshot for better logo visibility over screenshot
