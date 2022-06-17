@@ -5,8 +5,7 @@ import "../utils.js" as Utils
 import "qrc:/qmlutils" as PegasusUtils
 //import QtQml 2.0
 
-FocusScope
-{
+FocusScope {
     id: root
 
     // Build the games list but with extra menu options at the start and end
@@ -26,27 +25,9 @@ FocusScope
         }
 
         function buildList() {
-            /*append({
-                "name":         "Explore",
-                "idx":          -1,
-                "icon":         "assets/images/navigation/Explore.png",
-                "background":   ""
-            })*/
             for(var i=0; i<activeCollection.count; i++) {
                 append(createListElement(i));
-            }/*
-            append({
-                "name":         "Top Games",
-                "idx":          -2,
-                "icon":         "assets/images/navigation/Top Rated.png",
-                "background":   ""
-            })//*/
-            /*append({
-                "name":         "All Software",
-                "idx":          -3,
-                "icon":         "../assets/images/allsoft_icon.svg",
-                "background":   ""
-            })*/
+            }
         }
 
         function createListElement(i) {
@@ -59,8 +40,7 @@ FocusScope
         }
     }
 
-    Item
-    {
+    Item {
         id: homeScreenContainer
         width: parent.width
         height: parent.height
@@ -79,11 +59,9 @@ FocusScope
             }
 
             // Top bar
-            Image
-            {
+            Image {
                 id: profileIcon
-                anchors
-                {
+                anchors {
                     top: parent.top;
                     left: parent.left;
                 }
@@ -105,8 +83,7 @@ FocusScope
                 }
             }
 
-            Text
-                {
+            Text {
                     id: collectionHomeTitle
                     text: currentCollection == -1 ? "" : api.collections.get(currentCollection).name
                     color: theme.text
@@ -125,8 +102,7 @@ FocusScope
                         verticalCenter: profileIcon.verticalCenter;
                         right: parent.right; rightMargin: vpx(15)
                     }
-                Text
-                {
+                Text {
                     id: sysTime
 
                     //12HR-"h:mmap" 24HR-"hh:mm"
@@ -261,11 +237,9 @@ FocusScope
 
 
         // Home menu
-        HomeBar
-        {
+        HomeBar {
             id: homeSwitcher
-            anchors
-            {
+            anchors {
                 left: parent.left; leftMargin: vpx(98)
                 right: parent.right
                 top: topbar.bottom;
@@ -321,8 +295,7 @@ FocusScope
                 }
 
                 onClicked: {
-                    if (allSoftwareButton.focus)
-                    {
+                    if (allSoftwareButton.focus) {
                         selectSfx.play();
                         showSoftwareScreen();
                     }
@@ -358,8 +331,7 @@ FocusScope
                 }
 
                 onClicked: {
-                    if (favoriteButton.focus)
-                    {
+                    if (favoriteButton.focus) {
                         selectSfx.play();
                         showFavoritesScreen();
                     }
@@ -395,8 +367,7 @@ FocusScope
                 }
 
                 onClicked: {
-                    if (themeButton.focus)
-                    {
+                    if (themeButton.focus) {
                         selectSfx.play();
                         toggleDarkMode();
                     }
@@ -430,8 +401,7 @@ FocusScope
                     borderSfx.play();
                 }
                 onClicked: {
-                    if (settingsButton.focus)
-                    {
+                    if (settingsButton.focus) {
                         showSettingsScreen();
                     }
                     else

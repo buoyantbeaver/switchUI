@@ -6,8 +6,7 @@ import "../layer_help"
 import "../utils.js" as Utils
 import "qrc:/qmlutils" as PegasusUtils
 
-FocusScope
-{
+FocusScope {
 
     property int numcolumns: widescreen ? 6 : 5
     property int idx: 0
@@ -37,8 +36,7 @@ FocusScope
         }
     }
 
-    Item
-    {
+    Item {
         id: softwareScreenContainer
         anchors.fill: parent
         anchors {
@@ -102,8 +100,7 @@ FocusScope
             }
 
         // Top bar
-        Item
-        {
+        Item {
             id: topBar
             anchors.left: parent.left
             anchors.top: parent.top
@@ -111,8 +108,7 @@ FocusScope
             height: Math.round(screenheight * 0.1222)
             z: 5
 
-            Image
-            {
+            Image {
                 id: headerIcon
                 width: Math.round(screenheight*0.0611)
                 height: width
@@ -125,8 +121,7 @@ FocusScope
                     left: parent.left; leftMargin: vpx(38)
                 }
 
-                Text
-                {
+                Text {
                     id: collectionTitle
                     text: currentCollection == -1 ? "All Software" : api.collections.get(currentCollection).name
                     color: theme.text
@@ -247,8 +242,7 @@ FocusScope
         }
 
         // Grid masks (better performance than using clip: true)
-        Rectangle
-        {
+        Rectangle {
             anchors {
                 left: parent.left; top: parent.top; right: parent.right
             }
@@ -258,8 +252,7 @@ FocusScope
         }
         
         // Game grid
-        GridView
-        {
+        GridView {
             id: gameGrid
             focus: true
 
@@ -304,12 +297,10 @@ FocusScope
             model: softwareList[sortByIndex].games //api.collections.get(collectionIndex).games
             delegate: gameGridDelegate
 
-            Component 
-            {
+            Component {
                 id: gameGridDelegate
                 
-                Item
-                {
+                Item {
                     id: delegateContainer
                     property bool selected: delegateContainer.GridView.isCurrentItem
                     onSelectedChanged: { if (selected) updateData() }
@@ -349,8 +340,7 @@ FocusScope
                     }
 
                     //white overlay on screenshot for better logo visibility over screenshot
-                    Rectangle
-                    {
+                    Rectangle {
                         width: parent.width
                         height: parent.height
                         color: "white"
@@ -401,8 +391,7 @@ FocusScope
                         onEntered: {}
                         onExited: {}
                         onClicked: {
-                            if (selected)
-                            {
+                            if (selected) {
                                 anim.start();
                                 playSoftware();
                             }
@@ -422,16 +411,14 @@ FocusScope
                         color: theme.button//"white"
                         z: -1
 
-                        Rectangle
-                        {
+                        Rectangle {
                             anchors.fill: outerborder
                             anchors.margins: vpx(4)
                             color: theme.button
                             z: 7
                         }
 
-                        Text
-                        {
+                        Text {
                             text: modelData.title
                             x: vpx(8)
                             width: parent.width - vpx(16)
@@ -519,8 +506,7 @@ FocusScope
                     }
 
                     // Border
-                    HighlightBorder
-                    {
+                    HighlightBorder {
                         id: highlightBorder
                         width: gameImage.width + vpx(18)
                         height: width

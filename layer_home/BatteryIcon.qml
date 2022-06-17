@@ -4,8 +4,7 @@ import QtGraphicalEffects 1.12
 Item {
     property int level // 0-100 levels
 
-    function getBatteryIcon()
-    {
+    function getBatteryIcon() {
         if (level >= 0 && level <= 20)
             return "../assets/images/battery-empty.svg" // fa-battery-empty
         else if (level >= 21 && level <= 40)

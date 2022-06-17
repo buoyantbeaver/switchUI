@@ -14,8 +14,7 @@ import "layer_help"
 import "Lists"
 import "resources" as Resources
 
-FocusScope
-{
+FocusScope {
     id: root
 
     // Load settings
@@ -72,42 +71,36 @@ FocusScope
     property real helpbarheight: Math.round(screenheight * 0.1041) // Calculated manually based on mockup
     property bool darkThemeActive
 
-    function showSoftwareScreen()
-    {
+    function showSoftwareScreen() {
         /*homeScreen.visible = false;
         softwareScreen.visible = true;*/
         softwareScreen.focus = true;
         toSoftware.play();
     }
     
-    function showFavoritesScreen()
-    {
+    function showFavoritesScreen() {
         favoritesScreen.focus = true;
         toSoftware.play();
     }
 
-    function showSettingsScreen()
-    {
+    function showSettingsScreen() {
         settingsScreen.focus = true;
         settingsSfx.play();
     }
 
-    function showHomeScreen()
-    {
+    function showHomeScreen() {
         homeScreen.focus = true;
         currentCollection = -1
         homeSfx.play()
     }
 
-    function playGame()
-    {
+    function playGame() {
         root.state = "playgame"
 
         launchSfx.play()
     }
 
-    function playSoftware()
-    {
+    function playSoftware() {
         root.state = "playsoftware"
 
         launchSfx.play()
@@ -290,8 +283,7 @@ FocusScope
     // Background
     Rectangle {
         id: background
-        anchors
-        {
+        anchors {
             left: parent.left; right: parent.right
             top: parent.top; bottom: parent.bottom
         }
@@ -308,12 +300,10 @@ FocusScope
 
 
     // Home screen
-    HomeScreen
-    {
+    HomeScreen {
         id: homeScreen
         focus: true
-        anchors
-        {
+        anchors {
             left: parent.left; right: parent.right
             top: parent.top; bottom: helpBar.top
         }
@@ -332,8 +322,7 @@ FocusScope
         id: settingsScreen
         opacity: 0
         visible: false
-        anchors
-        {
+        anchors {
             left: parent.left; leftMargin: screenmargin
             right: parent.right; rightMargin: screenmargin
             top: parent.top; bottom: helpBar.top
@@ -345,8 +334,7 @@ FocusScope
         id: favoritesScreen
         opacity: 0
         visible: false
-        anchors
-        {
+        anchors {
             left: parent.left;// leftMargin: screenmargin
             right: parent.right;// rightMargin: screenmargin
             top: parent.top; bottom: helpBar.top
@@ -358,8 +346,7 @@ FocusScope
         id: softwareScreen
         opacity: 0
         visible: false
-        anchors
-        {
+        anchors {
             left: parent.left;// leftMargin: screenmargin
             right: parent.right;// rightMargin: screenmargin
             top: parent.top; bottom: helpBar.top
@@ -379,11 +366,9 @@ FocusScope
 
 
     // Help bar
-    Item
-    {
+    Item {
         id: helpBar
-        anchors
-        {
+        anchors {
             left: parent.left; leftMargin: screenmargin
             right: parent.right; rightMargin: screenmargin
             bottom: parent.bottom

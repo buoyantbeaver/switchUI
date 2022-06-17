@@ -83,8 +83,7 @@ id: root
     property real itemheight: vpx(50)
 
     // Top bar
-    Item
-    {
+    Item {
         id: topBar
         anchors.left: parent.left
         anchors.top: parent.top
@@ -92,8 +91,7 @@ id: root
         height: Math.round(screenheight * 0.1222)
         z: 5
 
-        Image
-        {
+        Image {
             id: headerIcon
             width: Math.round(screenheight*0.0611)
             height: width
@@ -106,8 +104,7 @@ id: root
                 left: parent.left; leftMargin: vpx(38)
             }
 
-            Text
-            {
+            Text {
                 id: collectionTitle
                 text: "Theme Settings"
                 color: theme.text

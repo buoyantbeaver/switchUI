@@ -161,8 +161,7 @@ ListView {
             }
 
 
-            Text
-            {
+            Text {
                 text: idx > -1 ? gameData.title : name
                 width: gameImage.width
                 horizontalAlignment : Text.AlignHCenter
@@ -183,8 +182,7 @@ ListView {
                 onEntered: {}
                 onExited: {}
                 onClicked: {
-                    if (selected)
-                    {
+                    if (selected) {
                         if (currentIndex == softCount) {
                             gotoSoftware();
                         } else {
@@ -230,8 +228,7 @@ ListView {
                 }
             }
 
-            HighlightBorder
-            {
+            HighlightBorder {
                 id: highlightBorder
                 width: gameImage.width + vpx(18)//vpx(274)
                 height: width//vpx(274)
@@ -269,8 +266,7 @@ ListView {
         homeSwitcher.currentIndex = -1
     }
 
-    function gotoSoftware()
-    {
+    function gotoSoftware() {
             showSoftwareScreen();
     }
 
