@@ -101,22 +101,6 @@ ListView {
                 visible: logo.source != "" && gameImage.source != ""
             }
 
-
-            // Text {
-            //     text: systemData.shortName
-            //     width: gameImage.width
-            //     horizontalAlignment : Text.AlignHCenter
-            //     font.family: titleFont.name
-            //     color: theme.text
-            //     font.pixelSize: Math.round(screenheight*0.025)
-            //     font.bold: true
-
-            //     anchors.centerIn: gameImage
-            //     wrapMode: Text.Wrap
-            //     visible: logo.source == "" && gameImage.source == ""
-            //     z: 10
-            // }
-
             MouseArea {
                 anchors.fill: gameImage
                 hoverEnabled: true
@@ -125,7 +109,7 @@ ListView {
                 onClicked: {
                     if (selected) {
                         anim.start();
-                        playGame();
+                        navigateToSystem();
                     }
                     else
                         navSound.play();
@@ -207,10 +191,14 @@ ListView {
     Keys.onPressed: {
         if (api.keys.isAccept(event) && !event.isAutoRepeat) {
             event.accepted = true;
-            anim.start();
-            nextCollection = currentScreenID;
-            showSoftwareScreen();
+            navigateToSystem();
         }
+    }
+    
+    function navigateToSystem(){
+        anim.start();
+        nextCollection = currentScreenID;
+        showSoftwareScreen();
     }
 }
 

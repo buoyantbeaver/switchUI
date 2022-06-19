@@ -61,7 +61,11 @@ FocusScope {
             }
             if (api.keys.isCancel(event)) {
                 event.accepted = true;
-                showHomeScreen();
+                if (settings.homeView == "Recent"){
+                    showHomeScreen();
+                } else {
+                    showSystemsScreen();
+                }
                 return;
             }
             if (api.keys.isFilters(event)) {

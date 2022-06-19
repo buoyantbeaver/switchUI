@@ -215,7 +215,11 @@ id: root
             // Back
             if (api.keys.isCancel(event) && !event.isAutoRepeat) {
                 event.accepted = true;
-                showHomeScreen();
+                if (settings.homeView == "Recent"){
+                    showHomeScreen();
+                } else {
+                    showSystemsScreen();
+                }
             }
         }
 
