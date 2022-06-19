@@ -33,6 +33,7 @@ FocusScope {
 
     // number of games that appear on the homescreen, not including the All Software button
     property int softCount: settings.softCount
+    property string homeView: settings.homeView
 
     ListLastPlayed  { id: listRecent; max: softCount}
     ListLastPlayed  { id: listByLastPlayed}
@@ -311,6 +312,16 @@ FocusScope {
             }
         },
         Transition {
+            from: "settingsscreen"; to: "systemsScreen"
+            SequentialAnimation {
+                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: settingsScreen; property: "visible"; value: false }
+                PropertyAction { target: systemsScreen; property: "visible"; value: true }
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 1; duration: 200}
+            }
+        },
+        
+        Transition {
             to: "playgame"
             SequentialAnimation {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
@@ -358,9 +369,9 @@ FocusScope {
     // Home screen
     HomeScreen {
         id: homeScreen
-        focus: settings.homeView == "Recent"
-        opacity: settings.homeView == "Recent" ? 1 : 0
-        visible: settings.homeView == "Recent" ? true : false
+        focus: homeView == "Recent"
+        opacity: homeView == "Recent" ? 1 : 0
+        visible: homeView == "Recent" ? true : false
         anchors {
             left: parent.left; right: parent.right
             top: parent.top; bottom: helpBar.top
@@ -371,9 +382,9 @@ FocusScope {
     SystemsScreen {
         id: systemsScreen
         
-        focus: settings.homeView == "Systems"
-        opacity: settings.homeView == "Systems" ? 1 : 0
-        visible: settings.homeView == "Systems" ? true : false
+        focus: homeView == "Systems"
+        opacity: homeView == "Systems" ? 1 : 0
+        visible: homeView == "Systems" ? true : false
         
         anchors {
             left: parent.left;// leftMargin: screenmargin
