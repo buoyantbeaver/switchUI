@@ -208,164 +208,130 @@ FocusScope {
     property int currentScreenID: -3
 
     transitions: [
-        // HOME
         Transition {
-            from: "homescreen"; to: "favoritesscreen"
+            to: "favoritesscreen"
             SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: homeScreen; property: "visible"; value: false }
-                PropertyAction { target: favoritesScreen; property: "visible"; value: true }
-                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 1; duration: 200}
-            }
-        },
-        Transition {
-            from: "homescreen"; to: "systemsScreen"
-            SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
-                PropertyAction { target: homeScreen; property: "visible"; value: false }
-                PropertyAction { target: systemsScreen; property: "visible"; value: true }
-                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 1; duration: 200}
-            }
-        },
-        Transition {
-            from: "homescreen"; to: "softwarescreen"
-            SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
-                PropertyAction { target: homeScreen; property: "visible"; value: false }
-                PropertyAction { target: softwareScreen; property: "visible"; value: true }
-                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 1; duration: 200}
-            }
-        },
-        Transition {
-            from: "homescreen"; to: "settingsscreen"
-            SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
-                PropertyAction { target: homeScreen; property: "visible"; value: false }
-                PropertyAction { target: settingsScreen; property: "visible"; value: true }
-                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 1; duration: 200}
-            }
-        },
-        
-        // SYSTEMS
-        Transition {
-            from: "systemsScreen"; to: "homescreen"
-            SequentialAnimation {
-                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 200}
-                PropertyAction { target: systemsScreen; property: "visible"; value: false }
-                PropertyAction { target: homeScreen; property: "visible"; value: true }
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
-            }
-        },
-        Transition {
-            from: "systemsScreen"; to: "softwarescreen"
-            SequentialAnimation {
-                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 200}
-                PropertyAction { target: systemsScreen; property: "visible"; value: false }
-                PropertyAction { target: softwareScreen; property: "visible"; value: true }
-                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 1; duration: 200}
-            }
-        },
-        Transition {
-            from: "systemsScreen"; to: "favoritesscreen"
-            SequentialAnimation {
-                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 200}
-                PropertyAction { target: systemsScreen; property: "visible"; value: false }
-                PropertyAction { target: favoritesScreen; property: "visible"; value: true }
-                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 1; duration: 200}
-            }
-        },
-        Transition {
-            from: "systemsScreen"; to: "settingsscreen"
-            SequentialAnimation {
-                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 200}
-                PropertyAction { target: systemsScreen; property: "visible"; value: false }
-                PropertyAction { target: settingsScreen; property: "visible"; value: true }
-                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 1; duration: 200}
-            }
-        },
-        
-        // FAVORITES
-        Transition {
-            from: "favoritesscreen"; to: "homescreen"
-            SequentialAnimation {
-                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: favoritesScreen; property: "visible"; value: false }
-                PropertyAction { target: homeScreen; property: "visible"; value: true }
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: softwareScreen; property: "visible"; value: false }
+                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: settingsScreen; property: "visible"; value: false }
+                
+                PropertyAction { target: favoritesScreen; property: "visible"; value: true }
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 1; duration: 400}
             }
         },
         Transition {
-            from: "favoritesscreen"; to: "systemsScreen"
+            to: "systemsScreen"
             SequentialAnimation {
-                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: favoritesScreen; property: "visible"; value: false }
-                PropertyAction { target: systemsScreen; property: "visible"; value: true }
-                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 1; duration: 200}
-            }
-        },
-        
-        // SOFTWARE
-        Transition {
-            from: "softwarescreen"; to: "homescreen"
-            SequentialAnimation {
-                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: softwareScreen; property: "visible"; value: false }
-                PropertyAction { target: homeScreen; property: "visible"; value: true }
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
+                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: settingsScreen; property: "visible"; value: false }
+                
+                PropertyAction { target: systemsScreen; property: "visible"; value: true }
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 1; duration: 400}
             }
         },
         Transition {
-            from: "softwarescreen"; to: "systemsScreen"
+            to: "softwarescreen"
             SequentialAnimation {
-                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: favoritesScreen; property: "visible"; value: false }
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: softwareScreen; property: "visible"; value: false }
-                PropertyAction { target: systemsScreen; property: "visible"; value: true }
-                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 1; duration: 200}
+                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: settingsScreen; property: "visible"; value: false }
+                
+                PropertyAction { target: softwareScreen; property: "visible"; value: true }
+                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 1; duration: 400}
+            }
+        },
+        Transition {
+            to: "settingsscreen"
+            SequentialAnimation {
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: favoritesScreen; property: "visible"; value: false }
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: softwareScreen; property: "visible"; value: false }
+                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: settingsScreen; property: "visible"; value: false }
+                
+                PropertyAction { target: settingsScreen; property: "visible"; value: true }
+                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 1; duration: 400}
             }
         },
         
-        // SETTINGS
         Transition {
-            from: "settingsscreen"; to: "homescreen"
+            to: "homescreen"
             SequentialAnimation {
-                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: favoritesScreen; property: "visible"; value: false }
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: softwareScreen; property: "visible"; value: false }
+                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: settingsScreen; property: "visible"; value: false }
+                
                 PropertyAction { target: homeScreen; property: "visible"; value: true }
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
-            }
-        },
-        Transition {
-            from: "settingsscreen"; to: "systemsScreen"
-            SequentialAnimation {
-                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 200}
-                PropertyAction { target: settingsScreen; property: "visible"; value: false }
-                PropertyAction { target: systemsScreen; property: "visible"; value: true }
-                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 1; duration: 200}
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 400}
             }
         },
         
-        // OTHERS
         Transition {
             to: "playgame"
             SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
-                PauseAnimation { duration: 200 }
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: favoritesScreen; property: "visible"; value: false }
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: softwareScreen; property: "visible"; value: false }
+                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: settingsScreen; property: "visible"; value: false }
+                
                 ScriptAction { script: launchGame(currentGame) }
             }
         },
         Transition {
             to: "playsoftware"
             SequentialAnimation {
-                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 200}
-                PauseAnimation { duration: 200 }
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: favoritesScreen; property: "visible"; value: false }
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: softwareScreen; property: "visible"; value: false }
+                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: settingsScreen; property: "visible"; value: false }
+                
                 ScriptAction { script: launchSoftware() }
-            }
-        },
-        Transition {
-            from: ""; to: "homescreen"
-            ParallelAnimation {
-                NumberAnimation { target: homeScreen; property: "scale"; from: 1.2; to: 1.0; duration: 200; easing.type: Easing.OutQuad }
-                NumberAnimation { target: homeScreen; property: "opacity"; from: 0; to: 1; duration: 200 }
             }
         }
     ]
