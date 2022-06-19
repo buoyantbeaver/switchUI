@@ -208,6 +208,7 @@ FocusScope {
     property int currentScreenID: -3
 
     transitions: [
+        // HOME
         Transition {
             from: "homescreen"; to: "favoritesscreen"
             SequentialAnimation {
@@ -245,16 +246,7 @@ FocusScope {
             }
         },
         
-        Transition {
-            from: "favoritesscreen"; to: "homescreen"
-            SequentialAnimation {
-                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 200}
-                PropertyAction { target: favoritesScreen; property: "visible"; value: false }
-                PropertyAction { target: homeScreen; property: "visible"; value: true }
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
-            }
-        },
-        
+        // SYSTEMS
         Transition {
             from: "systemsScreen"; to: "homescreen"
             SequentialAnimation {
@@ -274,6 +266,15 @@ FocusScope {
             }
         },
         Transition {
+            from: "systemsScreen"; to: "favoritesscreen"
+            SequentialAnimation {
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAction { target: favoritesScreen; property: "visible"; value: true }
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 1; duration: 200}
+            }
+        },
+        Transition {
             from: "systemsScreen"; to: "settingsscreen"
             SequentialAnimation {
                 PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 200}
@@ -283,6 +284,27 @@ FocusScope {
             }
         },
         
+        // FAVORITES
+        Transition {
+            from: "favoritesscreen"; to: "homescreen"
+            SequentialAnimation {
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: favoritesScreen; property: "visible"; value: false }
+                PropertyAction { target: homeScreen; property: "visible"; value: true }
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
+            }
+        },
+        Transition {
+            from: "favoritesscreen"; to: "systemsScreen"
+            SequentialAnimation {
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: favoritesScreen; property: "visible"; value: false }
+                PropertyAction { target: systemsScreen; property: "visible"; value: true }
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 1; duration: 200}
+            }
+        },
+        
+        // SOFTWARE
         Transition {
             from: "softwarescreen"; to: "homescreen"
             SequentialAnimation {
@@ -302,6 +324,7 @@ FocusScope {
             }
         },
         
+        // SETTINGS
         Transition {
             from: "settingsscreen"; to: "homescreen"
             SequentialAnimation {
@@ -321,6 +344,7 @@ FocusScope {
             }
         },
         
+        // OTHERS
         Transition {
             to: "playgame"
             SequentialAnimation {
