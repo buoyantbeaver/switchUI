@@ -33,7 +33,6 @@ FocusScope {
 
     // number of games that appear on the homescreen, not including the All Software button
     property int softCount: settings.softCount
-    property string homeView: settings.homeView
 
     ListLastPlayed  { id: listRecent; max: softCount}
     ListLastPlayed  { id: listByLastPlayed}
@@ -100,13 +99,13 @@ FocusScope {
     }
 
     function playGame() {
-        root.state = "playgame"
+        root.state = "PLAYGAME"
 
         launchSfx.play()
     }
 
     function playSoftware() {
-        root.state = "playsoftware"
+        root.state = "PLAYSOFTWARE"
 
         launchSfx.play()
     }
@@ -183,25 +182,25 @@ FocusScope {
     // State settings
     states: [
         State {
-            name: "homescreen"; when: homeScreen.focus == true
+            name: "SYSTEMS"; when: homeScreen.focus == true
         },
         State {
-            name: "favoritesscreen"; when: favoritesScreen.focus == true
+            name: "FAVORITES"; when: favoritesScreen.focus == true
         },
         State {
-            name: "systemsScreen"; when: systemsScreen.focus == true
+            name: "SYSTEMS"; when: systemsScreen.focus == true
         },
         State {
-            name: "softwarescreen"; when: softwareScreen.focus == true
+            name: "SOFTWARE"; when: softwareScreen.focus == true
         },
         State {
-            name: "settingsscreen"; when: settingsScreen.focus == true
+            name: "SETTINGS"; when: settingsScreen.focus == true
         },
         State {
-            name: "playgame";
+            name: "PLAYGAME";
         },
         State {
-            name: "playsoftware";
+            name: "PLAYSOFTWARE";
         }
     ]
 
@@ -209,7 +208,7 @@ FocusScope {
 
     transitions: [
         Transition {
-            to: "favoritesscreen"
+            to: "FAVORITES"
             SequentialAnimation {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: homeScreen; property: "visible"; value: false }
@@ -227,7 +226,7 @@ FocusScope {
             }
         },
         Transition {
-            to: "systemsScreen"
+            to: "SYSTEMS"
             SequentialAnimation {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: homeScreen; property: "visible"; value: false }
@@ -245,7 +244,7 @@ FocusScope {
             }
         },
         Transition {
-            to: "softwarescreen"
+            to: "SOFTWARE"
             SequentialAnimation {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: homeScreen; property: "visible"; value: false }
@@ -263,7 +262,7 @@ FocusScope {
             }
         },
         Transition {
-            to: "settingsscreen"
+            to: "SETTINGS"
             SequentialAnimation {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: homeScreen; property: "visible"; value: false }
@@ -282,7 +281,7 @@ FocusScope {
         },
         
         Transition {
-            to: "homescreen"
+            to: "SYSTEMS"
             SequentialAnimation {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: homeScreen; property: "visible"; value: false }
@@ -301,7 +300,7 @@ FocusScope {
         },
         
         Transition {
-            to: "playgame"
+            to: "PLAYGAME"
             SequentialAnimation {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: homeScreen; property: "visible"; value: false }
@@ -318,7 +317,7 @@ FocusScope {
             }
         },
         Transition {
-            to: "playsoftware"
+            to: "PLAYSOFTWARE"
             SequentialAnimation {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: homeScreen; property: "visible"; value: false }
@@ -349,7 +348,7 @@ FocusScope {
 
     //starting collection is set here
     Component.onCompleted: {
-        state: "homescreen"
+        state: "SYSTEMS"
         currentCollection = -1 
         api.memory.unset('Last Collection');
         homeSfx.play()
@@ -359,9 +358,9 @@ FocusScope {
     // Home screen
     HomeScreen {
         id: homeScreen
-        focus: homeView == "Recent"
-        opacity: homeView == "Recent" ? 1 : 0
-        visible: homeView == "Recent" ? true : false
+        focus: settings.homeView == "Recent"
+        opacity: settings.homeView == "Recent" ? 1 : 0
+        visible: settings.homeView == "Recent" ? true : false
         anchors {
             left: parent.left; right: parent.right
             top: parent.top; bottom: helpBar.top
@@ -372,9 +371,9 @@ FocusScope {
     SystemsScreen {
         id: systemsScreen
         
-        focus: homeView == "Systems"
-        opacity: homeView == "Systems" ? 1 : 0
-        visible: homeView == "Systems" ? true : false
+        focus: settings.homeView == "Systems"
+        opacity: settings.homeView == "Systems" ? 1 : 0
+        visible: settings.homeView == "Systems" ? true : false
         
         anchors {
             left: parent.left;// leftMargin: screenmargin
