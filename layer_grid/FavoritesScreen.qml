@@ -112,7 +112,7 @@ FocusScope {
                 id: headerIcon
                 width: Math.round(screenheight*0.0611)
                 height: width
-                source: "../assets/images/favorites.png"
+                source: "../assets/images/heart.png"
                 sourceSize.width: vpx(128)
                 sourceSize.height: vpx(128)
 

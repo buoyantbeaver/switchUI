@@ -7,7 +7,7 @@ import "qrc:/qmlutils" as PegasusUtils
 
 
 ListView {
-    id: homeLayout
+    id: collectionsLayout
     //anchors.fill: parent
     property int _index: 0
     spacing: vpx(14)
@@ -35,18 +35,18 @@ ListView {
             id: wrapper
 
             property bool selected: ListView.isCurrentItem
-            property var gameData: searchtext ? modelData : listRecent.currentGame(idx)
+            property var systemData: api.collections.get(idx)
             property bool isGame: idx >= 0
 
-            onGameDataChanged: { if (selected) updateData() }
+            onSystemDataChanged: { if (selected) updateData() }
             onSelectedChanged: { if (selected) updateData() }
 
             function updateData() {
-                currentGame = gameData;
+                currentGame = systemData;
                 currentScreenID = idx;
             }
 
-            width: homeLayout.height//isGame ? homeLayout.height : homeLayout.height*0.7
+            width: collectionsLayout.height//collectionsLayout.height : collectionsLayout.height*0.7
             height: width
             color: "transparent"
 
@@ -54,9 +54,9 @@ ListView {
 
             Rectangle{
                 id: background
-                width: isGame ? homeLayout.height : homeLayout.height*0.7
+                width: collectionsLayout.height // collectionsLayout.height*0.7
                 height: width
-                radius: isGame ? 0 : width
+                radius: 0
                 opacity: 1
                 color: theme.button
                 layer.enabled: enableDropShadows
@@ -76,39 +76,20 @@ ListView {
 
             // Preference order for Game Backgrounds
             property var gameBG: {
-                return getGameBackground(gameData, settings.gameBackground);
+                return getGameBackground(systemData, settings.gameBackground);
             }
 
             Image {
                 id: gameImage
-                width: isGame ? homeLayout.height : homeLayout.height*0.7//.width
+                width: collectionsLayout.height
                 height: width
                 smooth: true
-                fillMode: (gameBG == gameData.assets.boxFront) ? Image.PreserveAspectFit : Image.PreserveAspectCrop
-                source: gameData.collections.get(0).shortName === "steam" ? gameData.assets.screenshot : gameBG
+                fillMode: Image.PreserveAspectCrop
+                source: "../assets/images/systems/" + systemData.shortName  + ".jpg"
                 asynchronous: true
                 sourceSize { width: 512; height: 512 }
                 
                 anchors.centerIn: parent
-                
-                Rectangle {
-                    id: favicon
-                    anchors { 
-                        right: parent.right; rightMargin: vpx(5); 
-                        top: parent.top; topMargin: vpx(5) 
-                    }
-                    width: vpx(24)
-                    height: width
-                    radius: width/2
-                    color: theme.accent
-                    visible: gameData.favorite
-                    Image {
-                        source: "../assets/images/heart.png"
-                        asynchronous: true
-                        anchors.fill: parent
-                        anchors.margins: vpx(4)            
-                    }
-                }
             }
 
             //white overlay on screenshot for better logo visibility over screenshot
@@ -120,61 +101,21 @@ ListView {
                 visible: logo.source != "" && gameImage.source != ""
             }
 
-            Image {
-                id: logo
 
-                anchors.fill: gameImage
-                anchors.centerIn: gameImage
-                anchors.margins: isGame ? vpx(30) : vpx(60)
-                property var logoImage: {
-                    if (gameData != null) {
-                        if (gameData.collections.get(0).shortName === "retropie")
-                            return "";//gameData.assets.boxFront;
-                        else if (gameData.collections.get(0).shortName === "steam")
-                            return Utils.logo(gameData) ? Utils.logo(gameData) : "" //root.logo(gameData);
-                        else if (gameData.assets.tile != "")
-                            return "";
-                        else if (gameBG == gameData.assets.boxFront)
-                            return "";
-                        else
-                            return gameData.assets.logo;
-                    } else {
-                        return ""
-                    }
-                }
+            // Text {
+            //     text: systemData.shortName
+            //     width: gameImage.width
+            //     horizontalAlignment : Text.AlignHCenter
+            //     font.family: titleFont.name
+            //     color: theme.text
+            //     font.pixelSize: Math.round(screenheight*0.025)
+            //     font.bold: true
 
-                source: gameData ? logoImage : icon //Utils.logo(gameData)
-                sourceSize: Qt.size(gameImage.width, gameImage.height)
-                fillMode: Image.PreserveAspectFit
-                asynchronous: true
-                smooth: true
-                // z: 10
-            }
-
-            ColorOverlay {
-                anchors.fill: logo
-                source: logo
-                color: theme.icon
-                antialiasing: true
-                cached: true
-                visible: !isGame
-            }
-
-
-            Text {
-                text: idx > -1 ? gameData.title : name
-                width: gameImage.width
-                horizontalAlignment : Text.AlignHCenter
-                font.family: titleFont.name
-                color: theme.text
-                font.pixelSize: Math.round(screenheight*0.025)
-                font.bold: true
-
-                anchors.centerIn: gameImage
-                wrapMode: Text.Wrap
-                visible: logo.source == "" && gameImage.source == ""
-                z: 10
-            }
+            //     anchors.centerIn: gameImage
+            //     wrapMode: Text.Wrap
+            //     visible: logo.source == "" && gameImage.source == ""
+            //     z: 10
+            // }
 
             MouseArea {
                 anchors.fill: gameImage
@@ -183,12 +124,8 @@ ListView {
                 onExited: {}
                 onClicked: {
                     if (selected) {
-                        if (currentIndex == softCount) {
-                            gotoSoftware();
-                        } else {
-                            anim.start();
-                            playGame();//launchGame(currentGame);
-                        }
+                        anim.start();
+                        playGame();
                     }
                     else
                         navSound.play();
@@ -201,7 +138,7 @@ ListView {
 
             Text {
                 id: topTitle
-                text: idx > -1 ? gameData.title : name
+                text: systemData.name // name
                 color: theme.accent
                 font.family: titleFont.name
                 font.pixelSize: Math.round(screenheight*0.035)
@@ -266,33 +203,13 @@ ListView {
         homeSwitcher.currentIndex = -1
     }
 
-    function gotoSoftware() {
-            showSoftwareScreen();
-    }
 
-
-    //TODO Software screen is always at index 12, but would hopefully not exist/be visible if there are less than 12 titles
     Keys.onPressed: {
         if (api.keys.isAccept(event) && !event.isAutoRepeat) {
             event.accepted = true;
-            if (currentIndex == softCount) {
-                gotoSoftware();
-            } else {
-                anim.start();
-                playGame();//launchGame(currentGame);
-            }
-        }
-        
-        if (api.keys.isDetails(event)) {
-            event.accepted = true;
-            if (currentGame.favorite){
-                turnOffSfx.play();
-            }
-            else {
-                turnOnSfx.play();
-            }
-            currentGame.favorite = !currentGame.favorite
-            return;
+            anim.start();
+            nextCollection = currentScreenID;
+            showSoftwareScreen();
         }
     }
 }

@@ -9,6 +9,7 @@ Item {
     property real borderWidth: vpx(10)
     property string label: "No label"
     property string icon: "../assets/images/allsoft_icon.svg"
+    property bool autoColor: true
     signal clicked
 
     Rectangle {
@@ -49,6 +50,7 @@ Item {
         antialiasing: true
         smooth: true
         cached: true
+        visible: autoColor
     }
 
     Rectangle {

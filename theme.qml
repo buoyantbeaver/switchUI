@@ -27,6 +27,7 @@ FocusScope {
             enableDropShadows:      api.memory.has("Enable DropShadows") ? api.memory.get("Enable DropShadows") : "Yes",
             playBGM:                api.memory.has("Background Music") ? api.memory.get("Background Music"): "No",
             softCount:              api.memory.has("Number of recent games") ? api.memory.get("Number of recent games"): 12,
+            homeView:               api.memory.has("Home view") ? api.memory.get("Home view"): "Systems",
         }
     }
 
@@ -72,14 +73,17 @@ FocusScope {
     property bool darkThemeActive
 
     function showSoftwareScreen() {
-        /*homeScreen.visible = false;
-        softwareScreen.visible = true;*/
         softwareScreen.focus = true;
         toSoftware.play();
     }
     
     function showFavoritesScreen() {
         favoritesScreen.focus = true;
+        toSoftware.play();
+    }
+    
+    function showSystemsScreen() {
+        systemsScreen.focus = true;
         toSoftware.play();
     }
 
@@ -168,10 +172,10 @@ FocusScope {
     property var theme : api.memory.get('theme') === 'themeLight' ? themeLight : themeDark ;
 
     function toggleDarkMode(){
-        if(theme === themeLight){
-        api.memory.set('theme', 'themeDark');
-        }else{
-        api.memory.set('theme', 'themeLight');
+        if(theme === themeLight) {
+            api.memory.set('theme', 'themeDark');
+        } else {
+            api.memory.set('theme', 'themeLight');
         }
     }
 
@@ -182,6 +186,9 @@ FocusScope {
         },
         State {
             name: "favoritesscreen"; when: favoritesScreen.focus == true
+        },
+        State {
+            name: "systemsScreen"; when: systemsScreen.focus == true
         },
         State {
             name: "softwarescreen"; when: softwareScreen.focus == true
@@ -210,6 +217,15 @@ FocusScope {
             }
         },
         Transition {
+            from: "homescreen"; to: "systemsScreen"
+            SequentialAnimation {
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAction { target: systemsScreen; property: "visible"; value: true }
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 1; duration: 200}
+            }
+        },
+        Transition {
             from: "homescreen"; to: "softwarescreen"
             SequentialAnimation {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 200}
@@ -227,6 +243,7 @@ FocusScope {
                 PropertyAnimation { target: settingsScreen; property: "opacity"; to: 1; duration: 200}
             }
         },
+        
         Transition {
             from: "favoritesscreen"; to: "homescreen"
             SequentialAnimation {
@@ -236,6 +253,35 @@ FocusScope {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
             }
         },
+        
+        Transition {
+            from: "systemsScreen"; to: "homescreen"
+            SequentialAnimation {
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAction { target: homeScreen; property: "visible"; value: true }
+                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
+            }
+        },
+        Transition {
+            from: "systemsScreen"; to: "softwarescreen"
+            SequentialAnimation {
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAction { target: softwareScreen; property: "visible"; value: true }
+                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 1; duration: 200}
+            }
+        },
+        Transition {
+            from: "systemsScreen"; to: "settingsscreen"
+            SequentialAnimation {
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAction { target: settingsScreen; property: "visible"; value: true }
+                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 1; duration: 200}
+            }
+        },
+        
         Transition {
             from: "softwarescreen"; to: "homescreen"
             SequentialAnimation {
@@ -245,6 +291,16 @@ FocusScope {
                 PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 200}
             }
         },
+        Transition {
+            from: "softwarescreen"; to: "systemsScreen"
+            SequentialAnimation {
+                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 200}
+                PropertyAction { target: softwareScreen; property: "visible"; value: false }
+                PropertyAction { target: systemsScreen; property: "visible"; value: true }
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 1; duration: 200}
+            }
+        },
+        
         Transition {
             from: "settingsscreen"; to: "homescreen"
             SequentialAnimation {
@@ -302,21 +358,29 @@ FocusScope {
     // Home screen
     HomeScreen {
         id: homeScreen
-        focus: true
+        focus: settings.homeView == "Recent"
+        opacity: settings.homeView == "Recent" ? 1 : 0
+        visible: settings.homeView == "Recent" ? true : false
         anchors {
             left: parent.left; right: parent.right
             top: parent.top; bottom: helpBar.top
         }
     }
-
-    // List specific input
-    /*Keys.onPressed: {
-        // disabled
-        /*if (api.keys.isFilters(event) && !event.isAutoRepeat) {
-            event.accepted = true;
-            toggleDarkMode();
+    
+    // Systems screen
+    SystemsScreen {
+        id: systemsScreen
+        
+        focus: settings.homeView == "Systems"
+        opacity: settings.homeView == "Systems" ? 1 : 0
+        visible: settings.homeView == "Systems" ? true : false
+        
+        anchors {
+            left: parent.left;// leftMargin: screenmargin
+            right: parent.right;// rightMargin: screenmargin
+            top: parent.top; bottom: helpBar.top
         }
-    }*/
+    }
 
     SettingsScreen {
         id: settingsScreen
@@ -340,6 +404,7 @@ FocusScope {
             top: parent.top; bottom: helpBar.top
         }
     }
+    
 
     // All Software screen
     SoftwareScreen {

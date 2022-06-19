@@ -10,7 +10,7 @@ FocusScope {
 
     // Build the games list but with extra menu options at the start and end
     ListModel {
-    id: gamesListModel
+        id: gamesListModel
 
         property var activeCollection: listRecent.games
 
@@ -25,17 +25,17 @@ FocusScope {
         }
 
         function buildList() {
-            for(var i=0; i<activeCollection.count; i++) {
+            for(var i=0; i<api.collections.count; i++) {
                 append(createListElement(i));
             }
         }
 
         function createListElement(i) {
             return {
-                name:       listRecent.games.get(i).title,
+                name:       api.collections.get(i).name,
+                // icon:       "",
                 idx:        i,
-                icon:       listRecent.games.get(i).assets.logo,
-                background: listRecent.games.get(i).assets.screenshots[0]
+                // background: api.collections.get(i).assets.screenshots[0]
             }
         }
     }
@@ -48,9 +48,7 @@ FocusScope {
         property var batteryStatus: isNaN(api.device.batteryPercent) ? "" : parseInt(api.device.batteryPercent*100);
 
         Item {
-        id: topbar
-
-            
+            id: topbar
             height: Math.round(screenheight * 0.2569)
             anchors {
                 left: parent.left; leftMargin: vpx(60)
@@ -84,17 +82,17 @@ FocusScope {
             }
 
             Text {
-                    id: collectionHomeTitle
-                    text: currentCollection == -1 ? "" : api.collections.get(currentCollection).name
-                    color: theme.text
-                    font.family: titleFont.name
-                    font.pixelSize: Math.round(screenheight*0.0277)
-                    font.bold: true
-                    anchors {
-                        verticalCenter: profileIcon.verticalCenter
-                        left: profileIcon.right; leftMargin: vpx(12)
-                    }
+                id: collectionHomeTitle
+                text: ""
+                color: theme.text
+                font.family: titleFont.name
+                font.pixelSize: Math.round(screenheight*0.0277)
+                font.bold: true
+                anchors {
+                    verticalCenter: profileIcon.verticalCenter
+                    left: profileIcon.right; leftMargin: vpx(12)
                 }
+            }
             
             RowLayout {
                 spacing: vpx(15)
@@ -237,7 +235,7 @@ FocusScope {
 
 
         // Home menu
-        HomeBar {
+        SystemsList {
             id: homeSwitcher
             anchors {
                 left: parent.left; leftMargin: vpx(98)
@@ -328,7 +326,7 @@ FocusScope {
 
                 Keys.onRightPressed:{
                     navSound.play();
-                    systemsButton.focus = true
+                    recentButton.focus = true
                 }
 
                 onClicked: {
@@ -344,17 +342,17 @@ FocusScope {
             }
             
             MenuButton {
-                id: systemsButton
+                id: recentButton
                 width: vpx(86); height: vpx(100)
-                label: "Systems"
+                label: "Recent"
                 autoColor: false
-                icon: "../assets/images/systems.png"
+                icon: "../assets/images/recent.png"
 
                 Keys.onPressed: {
                     if (api.keys.isAccept(event) && !event.isAutoRepeat) {
                         event.accepted = true;
                         selectSfx.play();
-                        showSystemsScreen();
+                        showHomeScreen();
                     }
                 }
 
@@ -369,12 +367,12 @@ FocusScope {
                 }
 
                 onClicked: {
-                    if (systemsButton.focus) {
+                    if (recentButton.focus) {
                         selectSfx.play();
-                        showSystemsScreen();
+                        showHomeScreen();
                     }
                     else
-                        systemsButton.focus = true;
+                        recentButton.focus = true;
                         navSound.play();
                         themeButton.currentIndex = -1;
                 }
@@ -396,7 +394,7 @@ FocusScope {
 
                 Keys.onLeftPressed:{
                     navSound.play();
-                    systemsButton.focus = true
+                    favoriteButton.focus = true
                 }
 
                 Keys.onRightPressed:{

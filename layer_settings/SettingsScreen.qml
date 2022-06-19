@@ -39,6 +39,11 @@ id: root
     ListModel {
         id: homeSettingsModel
         ListElement {
+            settingName: "Home view"
+            settingSubtitle: ""
+            setting: "Systems,Recent"
+        }
+        ListElement {
             settingName: "Time Format"
             settingSubtitle: ""
             setting: "12hr,24hr"
@@ -119,19 +124,19 @@ id: root
         }
 
         ColorOverlay {
-                anchors.fill: headerIcon
-                source: headerIcon
-                color: theme.text
-                cached: true
+            anchors.fill: headerIcon
+            source: headerIcon
+            color: theme.text
+            cached: true
         }
 
         MouseArea {
-                anchors.fill: parent
-                hoverEnabled: false
-                onEntered: {}
-                onExited: {}
-                onClicked: {}
-            }
+            anchors.fill: parent
+            hoverEnabled: false
+            onEntered: {}
+            onExited: {}
+            onClicked: {}
+        }
 
         // Line
         Rectangle {
