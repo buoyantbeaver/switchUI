@@ -8,10 +8,10 @@ import "qrc:/qmlutils" as PegasusUtils
 
 FocusScope {
 
-    property int numcolumns: widescreen ? 6 : 5
+    property int numcolumns: api.memory.has("numColumns") ? api.memory.get("numColumns") : 5
     // Explicitly break the binding
-    property int numcolumnsMin: { numcolumnsMin = numcolumns - 1 }
-    property int numcolumnsMax: { numcolumnsMax = numcolumns + 1 }
+    property int numcolumnsMin: 4
+    property int numcolumnsMax: 6
     property int idx: 0
     // "By Time Last Played" "By Title" "By Total Play Time"
     property var sortTitle: {
@@ -70,6 +70,7 @@ FocusScope {
                 } else {
                     numcolumns = numcolumnsMin
                 }
+                api.memory.set("numColumns", numcolumns)
                 return;
             }
             
