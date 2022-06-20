@@ -6,9 +6,11 @@ A clean and simple theme inspired by the experience of the Nintendo Switch for t
 This is a fork of skylineOS, which at the same time was a fork of switchOS.
 
 
-![skylineOS Pegasus theme](assets/images/screenshot_bar_end.png)
+![skylineOS Pegasus theme](assets/images/screenshot_systems.png)
 
-![skylineOS Pegasus theme](assets/images/screenshot_allsoft_ps1.png)
+![skylineOS Pegasus theme](assets/images/screenshot_wii.png)
+
+![skylineOS Pegasus theme](assets/images/screenshot_recent.png)
 
 
 ## Installation
@@ -24,3 +26,4 @@ v0.2
 - Added "Favorites" to the bottom bar
 - Added quick "Fav" toggle button
 - Added "Number of recent games" to the Settings
+- Added ability to change zoom

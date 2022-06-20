@@ -275,7 +275,8 @@ FocusScope {
                 id: allSoftwareButton
                 width: vpx(86); height: vpx(100)
                 label: "All Software"
-                icon: "../assets/images/allsoft_icon.svg"
+                autoColor: false
+                icon: "../assets/images/allsoft_icon_blue.svg"
 
                 Keys.onPressed: {
                     if (api.keys.isAccept(event) && !event.isAutoRepeat) {

@@ -10,6 +10,7 @@ Item {
     property string label: "No label"
     property string icon: "../assets/images/allsoft_icon.svg"
     property bool autoColor: true
+    property string customColor: "transparent"
     signal clicked
 
     Rectangle {
@@ -46,11 +47,10 @@ Item {
     ColorOverlay {
         anchors.fill: menuIcon
         source: menuIcon
-        color: theme.icon
+        color: autoColor ? theme.icon : customColor
         antialiasing: true
         smooth: true
         cached: true
-        visible: autoColor
     }
 
     Rectangle {
