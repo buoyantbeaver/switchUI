@@ -9,9 +9,9 @@ import "qrc:/qmlutils" as PegasusUtils
 FocusScope {
 
     property int numcolumns: api.memory.has("numColumns") ? api.memory.get("numColumns") : 5
-    // Explicitly break the binding
     property int numcolumnsMin: 4
     property int numcolumnsMax: 6
+    
     property int idx: 0
     // "By Time Last Played" "By Title" "By Total Play Time"
     property var sortTitle: {
@@ -289,9 +289,9 @@ FocusScope {
             }
 
             anchors {
-                left: parent.left; leftMargin: vpx(63)
-                top: topBar.bottom;
-                right: parent.right; rightMargin: vpx(63)
+                left: parent.left; leftMargin: vpx(48)
+                top: topBar.bottom; topMargin: -vpx(20)
+                right: parent.right; rightMargin: vpx(48)
                 bottom: parent.bottom
             }
 			topMargin: Math.round(screenheight*0.12)
