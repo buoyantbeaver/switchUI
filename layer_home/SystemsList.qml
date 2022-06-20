@@ -80,7 +80,7 @@ ListView {
             }
 
             Image {
-                id: gameImage
+                id: systemImage
                 width: collectionsLayout.height
                 height: width
                 smooth: true
@@ -91,18 +91,9 @@ ListView {
                 
                 anchors.centerIn: parent
             }
-
-            //white overlay on screenshot for better logo visibility over screenshot
-            Rectangle {
-                width: gameImage.width
-                height: gameImage.height
-                color: "white"
-                opacity: 0.15
-                visible: logo.source != "" && gameImage.source != ""
-            }
-
+            
             MouseArea {
-                anchors.fill: gameImage
+                anchors.fill: systemImage
                 hoverEnabled: true
                 onEntered: {}
                 onExited: {}
@@ -133,8 +124,8 @@ ListView {
                 //elide: Text.ElideRight
 
                 anchors {
-                    horizontalCenter: gameImage.horizontalCenter
-                    bottom: gameImage.top; bottomMargin: Math.round(screenheight*0.025)
+                    horizontalCenter: systemImage.horizontalCenter
+                    bottom: systemImage.top; bottomMargin: Math.round(screenheight*0.025)
                 }
 
                 opacity: wrapper.ListView.isCurrentItem ? 1 : 0
@@ -143,15 +134,15 @@ ListView {
 
             Component.onCompleted: {
                 if (wordWrap) {
-                    if (topTitle.paintedWidth > gameImage.width * 1.70) {
-                        topTitle.width = gameImage.width * 1.5
+                    if (topTitle.paintedWidth > systemImage.width * 1.70) {
+                        topTitle.width = systemImage.width * 1.5
                     }
                 }
             }
 
             HighlightBorder {
                 id: highlightBorder
-                width: gameImage.width + vpx(18)//vpx(274)
+                width: systemImage.width + vpx(18)//vpx(274)
                 height: width//vpx(274)
                 
                 anchors.centerIn: parent

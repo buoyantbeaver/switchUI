@@ -348,13 +348,42 @@ FocusScope {
                             samples: 6
                             z: -200
                         }
+                        
+                        Rectangle {
+                            id: favicon
+                            anchors { 
+                                right: parent.right; rightMargin: vpx(5); 
+                                top: parent.top; topMargin: vpx(5) 
+                            }
+                            width: vpx(28)
+                            height: width
+                            radius: width/2
+                            color: theme.accent
+                            visible: modelData.favorite
+                            Image {
+                                id: faviconImage
+                                source: "../assets/images/heart_filled.png"
+                                asynchronous: true
+                                anchors.fill: parent
+                                anchors.margins: vpx(7)            
+                            }
+                            
+                            ColorOverlay {
+                                anchors.fill: faviconImage
+                                source: faviconImage
+                                color: theme.icon
+                                antialiasing: true
+                                smooth: true
+                                cached: true
+                            }
+                        }
                     }
 
                     //white overlay on screenshot for better logo visibility over screenshot
                     Rectangle {
                         width: parent.width
                         height: parent.height
-                        color: "white"
+                        color: theme.main
                         opacity: 0.15
                         visible: logo.source != "" && gameImage.source != ""
                     }
