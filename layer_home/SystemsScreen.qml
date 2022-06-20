@@ -41,7 +41,7 @@ FocusScope {
     }
 
     Item {
-        id: homeScreenContainer
+        id: recentScreenContainer
         width: parent.width
         height: parent.height
 
@@ -140,7 +140,7 @@ FocusScope {
                         id: batteryPercentage
 
                         function set() {
-                            batteryPercentage.text = homeScreenContainer.batteryStatus+"%";
+                            batteryPercentage.text = recentScreenContainer.batteryStatus+"%";
                         }
 
                         Timer {
@@ -175,7 +175,7 @@ FocusScope {
                         }
 
                         function set() {
-                            batteryIcon.level = homeScreenContainer.batteryStatus;
+                            batteryIcon.level = recentScreenContainer.batteryStatus;
                         }
 
                         Timer {
@@ -352,7 +352,7 @@ FocusScope {
                     if (api.keys.isAccept(event) && !event.isAutoRepeat) {
                         event.accepted = true;
                         selectSfx.play();
-                        showHomeScreen();
+                        showRecentScreen();
                     }
                 }
 
@@ -369,7 +369,7 @@ FocusScope {
                 onClicked: {
                     if (recentButton.focus) {
                         selectSfx.play();
-                        showHomeScreen();
+                        showRecentScreen();
                     }
                     else
                         recentButton.focus = true;

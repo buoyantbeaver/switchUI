@@ -85,7 +85,7 @@ FocusScope {
         Layout.minimumWidth: vpx(50)
         Layout.preferredWidth: vpx(75)
 
-        onClicked: { showHomeScreen(); }
+        onClicked: { showRecentScreen(); }
 
         visible: showBack
       }

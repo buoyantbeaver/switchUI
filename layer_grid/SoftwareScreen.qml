@@ -56,7 +56,7 @@ FocusScope {
             if (api.keys.isCancel(event)) {
                 event.accepted = true;
                 if (settings.homeView == "Recent"){
-                    showHomeScreen();
+                    showRecentScreen();
                 } else {
                     showSystemsScreen();
                 }

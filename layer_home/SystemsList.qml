@@ -27,10 +27,10 @@ ListView {
     NumberAnimation { id: anim; property: "scale"; to: 0.7; duration: 100 }
 
     model: gamesListModel
-    delegate: homeBarDelegate
+    delegate: recentListDelegate
 
     Component {
-        id: homeBarDelegate
+        id: recentListDelegate
         Rectangle {
             id: wrapper
 

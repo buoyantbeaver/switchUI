@@ -25,14 +25,15 @@ FocusScope {
             wordWrap:               api.memory.has("Word Wrap on Titles") ? api.memory.get("Word Wrap on Titles") : "Yes",
             batteryPercentSetting:  api.memory.has("Display Battery Percentage") ? api.memory.get("Display Battery Percentage") : "No",
             enableDropShadows:      api.memory.has("Enable DropShadows") ? api.memory.get("Enable DropShadows") : "Yes",
-            playBGM:                api.memory.has("Background Music") ? api.memory.get("Background Music"): "No",
-            softCount:              api.memory.has("Number of recent games") ? api.memory.get("Number of recent games"): 12,
-            homeView:               api.memory.has("Home view") ? api.memory.get("Home view"): "Systems",
+            playBGM:                api.memory.has("Background Music") ? api.memory.get("Background Music") : "No",
+            softCount:              api.memory.has("Number of recent games") ? api.memory.get("Number of recent games") : 12,
+            homeView:               api.memory.has("Home view") ? api.memory.get("Home view") : "Systems",
         }
     }
 
-    // number of games that appear on the homescreen, not including the All Software button
+    // number of games that appear on the recentScreen, not including the All Software button
     property int softCount: settings.softCount
+    property string homeView: settings.homeView
 
     ListLastPlayed  { id: listRecent; max: softCount}
     ListLastPlayed  { id: listByLastPlayed}
@@ -92,8 +93,8 @@ FocusScope {
         settingsSfx.play();
     }
 
-    function showHomeScreen() {
-        homeScreen.focus = true;
+    function showRecentScreen() {
+        recentScreen.focus = true;
         currentCollection = -1
         homeSfx.play()
     }
@@ -110,7 +111,7 @@ FocusScope {
         launchSfx.play()
     }
 
-    // Launch the current game from HomeBar
+    // Launch the current game from RecentList
     function launchGame(game) {
         api.memory.set('Last Collection', currentCollection);
         if (game != null)
@@ -182,7 +183,7 @@ FocusScope {
     // State settings
     states: [
         State {
-            name: "SYSTEMS"; when: homeScreen.focus == true
+            name: "RECENT"; when: recentScreen.focus == true
         },
         State {
             name: "FAVORITES"; when: favoritesScreen.focus == true
@@ -210,8 +211,8 @@ FocusScope {
         Transition {
             to: "FAVORITES"
             SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
-                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: recentScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: recentScreen; property: "visible"; value: false }
                 PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: favoritesScreen; property: "visible"; value: false }
                 PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
@@ -226,10 +227,28 @@ FocusScope {
             }
         },
         Transition {
+            to: "RECENT"
+            SequentialAnimation {
+                PropertyAnimation { target: recentScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: recentScreen; property: "visible"; value: false }
+                PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: favoritesScreen; property: "visible"; value: false }
+                PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: systemsScreen; property: "visible"; value: false }
+                PropertyAnimation { target: softwareScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: softwareScreen; property: "visible"; value: false }
+                PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: settingsScreen; property: "visible"; value: false }
+                
+                PropertyAction { target: recentScreen; property: "visible"; value: true }
+                PropertyAnimation { target: recentScreen; property: "opacity"; to: 1; duration: 400}
+            }
+        },
+        Transition {
             to: "SYSTEMS"
             SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
-                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: recentScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: recentScreen; property: "visible"; value: false }
                 PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: favoritesScreen; property: "visible"; value: false }
                 PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
@@ -246,8 +265,8 @@ FocusScope {
         Transition {
             to: "SOFTWARE"
             SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
-                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: recentScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: recentScreen; property: "visible"; value: false }
                 PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: favoritesScreen; property: "visible"; value: false }
                 PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
@@ -264,8 +283,8 @@ FocusScope {
         Transition {
             to: "SETTINGS"
             SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
-                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: recentScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: recentScreen; property: "visible"; value: false }
                 PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: favoritesScreen; property: "visible"; value: false }
                 PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
@@ -283,8 +302,8 @@ FocusScope {
         Transition {
             to: "SYSTEMS"
             SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
-                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: recentScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: recentScreen; property: "visible"; value: false }
                 PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: favoritesScreen; property: "visible"; value: false }
                 PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
@@ -294,16 +313,16 @@ FocusScope {
                 PropertyAnimation { target: settingsScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: settingsScreen; property: "visible"; value: false }
                 
-                PropertyAction { target: homeScreen; property: "visible"; value: true }
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 1; duration: 400}
+                PropertyAction { target: recentScreen; property: "visible"; value: true }
+                PropertyAnimation { target: recentScreen; property: "opacity"; to: 1; duration: 400}
             }
         },
         
         Transition {
             to: "PLAYGAME"
             SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
-                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: recentScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: recentScreen; property: "visible"; value: false }
                 PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: favoritesScreen; property: "visible"; value: false }
                 PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
@@ -319,8 +338,8 @@ FocusScope {
         Transition {
             to: "PLAYSOFTWARE"
             SequentialAnimation {
-                PropertyAnimation { target: homeScreen; property: "opacity"; to: 0; duration: 10}
-                PropertyAction { target: homeScreen; property: "visible"; value: false }
+                PropertyAnimation { target: recentScreen; property: "opacity"; to: 0; duration: 10}
+                PropertyAction { target: recentScreen; property: "visible"; value: false }
                 PropertyAnimation { target: favoritesScreen; property: "opacity"; to: 0; duration: 10}
                 PropertyAction { target: favoritesScreen; property: "visible"; value: false }
                 PropertyAnimation { target: systemsScreen; property: "opacity"; to: 0; duration: 10}
@@ -345,22 +364,14 @@ FocusScope {
         }
         color: theme.main
     }
-
-    //starting collection is set here
-    Component.onCompleted: {
-        state: "SYSTEMS"
-        currentCollection = -1 
-        api.memory.unset('Last Collection');
-        homeSfx.play()
-    }
-
-
+    
+    
     // Home screen
-    HomeScreen {
-        id: homeScreen
-        focus: settings.homeView == "Recent"
-        opacity: settings.homeView == "Recent" ? 1 : 0
-        visible: settings.homeView == "Recent" ? true : false
+    RecentScreen {
+        id: recentScreen
+        
+        opacity: 0
+        visible: false
         anchors {
             left: parent.left; right: parent.right
             top: parent.top; bottom: helpBar.top
@@ -371,10 +382,8 @@ FocusScope {
     SystemsScreen {
         id: systemsScreen
         
-        focus: settings.homeView == "Systems"
-        opacity: settings.homeView == "Systems" ? 1 : 0
-        visible: settings.homeView == "Systems" ? true : false
-        
+        opacity: 0
+        visible: false
         anchors {
             left: parent.left;// leftMargin: screenmargin
             right: parent.right;// rightMargin: screenmargin
@@ -384,6 +393,7 @@ FocusScope {
 
     SettingsScreen {
         id: settingsScreen
+        
         opacity: 0
         visible: false
         anchors {
@@ -416,6 +426,23 @@ FocusScope {
             right: parent.right;// rightMargin: screenmargin
             top: parent.top; bottom: helpBar.top
         }
+    }
+    
+    //starting collection is set here
+    Component.onCompleted: {
+        currentCollection = -1 
+        api.memory.unset('Last Collection');
+        homeSfx.play()
+        if (homeView == "Recent"){
+            recentScreen.focus = true
+            recentScreen.opacity = 1
+            recentScreen.visible = true
+        } else {
+            systemsScreen.focus = true
+            systemsScreen.opacity = 1
+            systemsScreen.visible = true
+        }
+        
     }
 
     //Changes Sort Option
@@ -459,7 +486,7 @@ FocusScope {
             anchors {
                 bottom: parent.bottom;
             }
-            showBack: !homeScreen.focus
+            showBack: !recentScreen.focus
             showCollControls: softwareScreen.focus
         }
 
@@ -519,7 +546,7 @@ FocusScope {
         volume: 1.0
     }
 
-      SoundEffect {
+    SoundEffect {
         id: settingsSfx
         source: "assets/audio/Settings.wav"
         volume: 1.0

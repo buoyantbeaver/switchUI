@@ -41,7 +41,7 @@ FocusScope {
     }
 
     Item {
-        id: homeScreenContainer
+        id: recentScreenContainer
         width: parent.width
         height: parent.height
 
@@ -84,7 +84,7 @@ FocusScope {
             }
 
             Text {
-                    id: collectionHomeTitle
+                    id: collectionRecentTitle
                     text: currentCollection == -1 ? "" : api.collections.get(currentCollection).name
                     color: theme.text
                     font.family: titleFont.name
@@ -142,7 +142,7 @@ FocusScope {
                         id: batteryPercentage
 
                         function set() {
-                            batteryPercentage.text = homeScreenContainer.batteryStatus+"%";
+                            batteryPercentage.text = recentScreenContainer.batteryStatus+"%";
                         }
 
                         Timer {
@@ -177,7 +177,7 @@ FocusScope {
                         }
 
                         function set() {
-                            batteryIcon.level = homeScreenContainer.batteryStatus;
+                            batteryIcon.level = recentScreenContainer.batteryStatus;
                         }
 
                         Timer {
@@ -236,9 +236,9 @@ FocusScope {
         }
 
 
-        // Home menu
-        HomeBar {
-            id: homeSwitcher
+        // Recent menu
+        RecentList {
+            id: recentSwitcher
             anchors {
                 left: parent.left; leftMargin: vpx(98)
                 right: parent.right
@@ -255,14 +255,14 @@ FocusScope {
             spacing: vpx(22)
 
             anchors {
-                top: homeSwitcher.bottom;
+                top: recentSwitcher.bottom;
                 bottom: parent.bottom
             }
 
             Keys.onUpPressed: {
                 navSound.play();
-                homeSwitcher.focus = true
-                homeSwitcher.currentIndex = homeSwitcher._index
+                recentSwitcher.focus = true
+                recentSwitcher.currentIndex = recentSwitcher._index
             }
 
             Keys.onDownPressed:{
@@ -302,7 +302,7 @@ FocusScope {
                     else
                         allSoftwareButton.focus = true;
                         navSound.play();
-                        homeSwitcher.currentIndex = -1;
+                        recentSwitcher.currentIndex = -1;
                 }
             }
             
@@ -339,7 +339,7 @@ FocusScope {
                     else
                         favoriteButton.focus = true;
                         navSound.play();
-                        homeSwitcher.currentIndex = -1;
+                        recentSwitcher.currentIndex = -1;
                 }
             }
             
@@ -412,7 +412,7 @@ FocusScope {
                     else
                         themeButton.focus = true;
                         navSound.play();
-                        homeSwitcher.currentIndex = -1;
+                        recentSwitcher.currentIndex = -1;
                 }
             }
 
@@ -445,7 +445,7 @@ FocusScope {
                     else
                         settingsButton.focus = true;
                         navSound.play();
-                        homeSwitcher.currentIndex = -1;
+                        recentSwitcher.currentIndex = -1;
                 }
                 visible: true
             }
