@@ -486,8 +486,6 @@ FocusScope {
             anchors {
                 bottom: parent.bottom;
             }
-            showBack: !recentScreen.focus
-            showCollControls: softwareScreen.focus
         }
 
     }
