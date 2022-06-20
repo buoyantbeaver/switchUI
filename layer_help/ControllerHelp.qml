@@ -10,16 +10,6 @@ FocusScope {
   property var gameData: softwareList[sortByIndex].currentGame(currentScreenID)
   property string collectionShortName: Utils.processPlatformName(currentGame.collections.get(0).shortName)
 
-  function processButtonArt(buttonModel) {
-    var i;
-    for (i = 0; buttonModel.length; i++) {
-      if (buttonModel[i].name().includes("Gamepad")) {
-        var buttonValue = buttonModel[i].key.toString(16)
-        return buttonValue.substring(buttonValue.length-1, buttonValue.length);
-      }
-    }
-  }
-
   Item {
     id: background
 
@@ -62,29 +52,35 @@ FocusScope {
 
       ControllerHelpButton {
         id: buttonOK
-        button: processButtonArt(api.keys.accept)
-        label: 'Ok'
+        button: "btn_A"
+        label: "Ok"
         Layout.fillWidth: true
         Layout.minimumWidth: vpx(50)
-        Layout.preferredWidth: vpx(60)
-
-        //onClicked: {console.log("OK Clicked!")}
-
+        Layout.preferredWidth: vpx(50)
       }
       
       ControllerHelpButton {
         id: buttonFavorite
-        button: "2" // processButtonArt(api.keys.details)
-        label: 'Fav'
+        button: "btn_Y"
+        label: "Fav"
         Layout.fillWidth: true
         Layout.minimumWidth: vpx(50)
-        Layout.preferredWidth: vpx(60)
+        Layout.preferredWidth: vpx(50)
+      }
+      
+      ControllerHelpButton {
+        id: buttonZoom
+        button: "btn_X"
+        label: "Zoom"
+        Layout.fillWidth: true
+        Layout.minimumWidth: vpx(50)
+        Layout.preferredWidth: vpx(75)
       }
 
       ControllerHelpButton {
         id: buttonBack
-        button: processButtonArt(api.keys.cancel)
-        label: 'Back'
+        button: "btn_B"
+        label: "Back"
         Layout.fillWidth: true
         Layout.minimumWidth: vpx(50)
         Layout.preferredWidth: vpx(75)
@@ -96,8 +92,8 @@ FocusScope {
 
       ControllerHelpButton {
         id: buttonNext
-        button: processButtonArt(api.keys.nextPage)
-        label: 'Next Collection'
+        button: "btn_R"
+        label: "Next Collection"
         Layout.fillWidth: true
         Layout.minimumWidth: vpx(175)
         Layout.preferredWidth: widescreen ? vpx(175) : vpx(212)
@@ -117,8 +113,8 @@ FocusScope {
       //Previous Collection Button
       ControllerHelpButton {
         id: buttonPrev
-        button: processButtonArt(api.keys.prevPage)
-        label: 'Prev Collection'
+        button: "btn_L"
+        label: "Prev Collection"
         Layout.fillWidth: true
         Layout.minimumWidth: vpx(130)
         Layout.preferredWidth: vpx(175)

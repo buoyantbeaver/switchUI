@@ -9,6 +9,9 @@ import "qrc:/qmlutils" as PegasusUtils
 FocusScope {
 
     property int numcolumns: widescreen ? 6 : 5
+    // Explicitly break the binding
+    property int numcolumnsMin: { numcolumnsMin = numcolumns - 1 }
+    property int numcolumnsMax: { numcolumnsMax = numcolumns + 1 }
     property int idx: 0
     // "By Time Last Played" "By Title" "By Total Play Time"
     property var sortTitle: {
@@ -26,16 +29,6 @@ FocusScope {
         }
     }
 
-    function processButtonArt(buttonModel) {
-        var i;
-        for (i = 0; buttonModel.length; i++) {
-            if (buttonModel[i].name().includes("Gamepad")) {
-            var buttonValue = buttonModel[i].key.toString(16)
-            return buttonValue.substring(buttonValue.length-1, buttonValue.length);
-            }
-        }
-    }
-
     Item {
         id: softwareScreenContainer
         anchors.fill: parent
@@ -47,7 +40,7 @@ FocusScope {
         Keys.onPressed: {
             if (event.isAutoRepeat)
                 return;
-
+            // Y: Favorite
             if (api.keys.isDetails(event)) {
                 event.accepted = true;
                 if (currentGame.favorite){
@@ -59,6 +52,7 @@ FocusScope {
                 currentGame.favorite = !currentGame.favorite
                 return;
             }
+            // B: Go back
             if (api.keys.isCancel(event)) {
                 event.accepted = true;
                 if (settings.homeView == "Recent"){
@@ -68,13 +62,26 @@ FocusScope {
                 }
                 return;
             }
+            // Y: Zoom
             if (api.keys.isFilters(event)) {
+                event.accepted = true;
+                if (numcolumns < numcolumnsMax){
+                    numcolumns += 1
+                } else {
+                    numcolumns = numcolumnsMin
+                }
+                return;
+            }
+            
+            // R2: Sort
+            if (api.keys.isPageDown(event)) {
                 event.accepted = true;
                 na.running = true
                 cycleSort();
                 return;
             }
-            // Cycle collection forward
+            
+            // R1: Cycle collection forward
             if (api.keys.isNextPage(event) && !event.isAutoRepeat) {
                 event.accepted = true;
                 turnOnSfx.play();
@@ -85,7 +92,7 @@ FocusScope {
                 }
             }
 
-            // Cycle collection back
+            // L1: Cycle collection back
             if (api.keys.isPrevPage(event) && !event.isAutoRepeat) {
                 event.accepted = true;
                 turnOffSfx.play();
@@ -157,7 +164,7 @@ FocusScope {
                     id: sortIcon
                     width: Math.round(screenheight*0.04)
                     height: width
-                    source: "../assets/images/navigation/"+ processButtonArt(api.keys.filters) + ".png"
+                    source: "../assets/images/navigation/btn_RT.png"
                     sourceSize.width: 64
                     sourceSize.height: 64
                     anchors {

@@ -283,6 +283,7 @@ ListView {
             }
         }
         
+        // Y: Favorite
         if (api.keys.isDetails(event)) {
             event.accepted = true;
             if (currentGame.favorite){
