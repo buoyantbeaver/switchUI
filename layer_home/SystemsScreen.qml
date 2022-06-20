@@ -273,6 +273,7 @@ FocusScope {
                 id: allSoftwareButton
                 width: vpx(86); height: vpx(100)
                 label: "All Software"
+                autoColor: false
                 icon: "../assets/images/allsoft_icon_blue.svg"
 
                 Keys.onPressed: {
