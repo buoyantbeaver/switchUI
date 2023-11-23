@@ -504,11 +504,11 @@ FocusScope {
                             id: gameTitle
                             text: sortByIndex == 3 ? modelData.publisher + " / " + modelData.title : modelData.title
                             color: theme.accent
-                            font.pixelSize: Math.round(screenheight*0.0222)
+                            font.pixelSize: Math.round(screenheight*0.0322)
                             font.bold: true
                             font.family: titleFont.name
                             //horizontalAlignment: Text.AlignHCenter
-                            wrapMode: Text.WordWrap
+                            wrapMode: Text.NoWrap
                             
                             anchors {
                                 verticalCenter: parent.verticalCenter
@@ -518,7 +518,7 @@ FocusScope {
                         }
 
                         Component.onCompleted: {
-                            if (wordWrap) {
+                            if (gameTitle.wordWrap === Text.WordWrap) {
                                 if (gameTitle.paintedWidth > gameImage.width * 1.75) {
                                     gameTitle.width = gameImage.width * 1.5 - vpx(54)
                                     titleBubble.height = titleBubble.height * 1.5

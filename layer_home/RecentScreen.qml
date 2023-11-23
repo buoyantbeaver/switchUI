@@ -310,7 +310,7 @@ FocusScope {
             MenuButton {
                 id: favoriteButton
                 width: vpx(86); height: vpx(100)
-                label: "Favorites"
+                label: "Favourites"
                 autoColor: false
                 icon: "../assets/images/heart.png"
 
@@ -384,7 +384,7 @@ FocusScope {
             MenuButton {
                 id: themeButton
                 width: vpx(86); height: vpx(100)
-                label: "Toggle Theme"
+                label: (theme === themeLight) ? "Dark Mode" : "Light Mode"
                 icon: "../assets/images/navigation/theme.svg"
 
                 Keys.onPressed: {

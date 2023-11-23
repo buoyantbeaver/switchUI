@@ -83,7 +83,28 @@ id: root
         }
     }
 
-    property var settingsArr: [generalPage, homePage, performancePage]
+    ListModel {
+        id: themeSettingsModel
+        ListElement {
+            settingName: "Basic White"
+            settingSubtitle: ""
+            setting: "Basic White, Basic Black"
+        }
+        ListElement {
+            settingName: "Basic Black"
+            settingSubtitle: ""
+            setting: "Basic White, Basic Black"
+        }
+    }
+
+    property var themeSettingsPage: {
+        return {
+            pageName: "Themes",
+            listmodel: themeSettingsModel
+        }
+    }
+
+    property var settingsArr: [generalPage, homePage, performancePage, themeSettingsPage]
 
     property real itemheight: vpx(50)
 

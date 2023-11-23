@@ -49,13 +49,13 @@ FocusScope {
                 verticalCenter: parent.verticalCenter
                 right: parent.right
             }
-            spacing: vpx(25)
+            spacing: vpx(50)
             layoutDirection: Qt.RightToLeft
 
             ControllerHelpButton {
                 id: buttonOK
                 button: "btn_A"
-                label: "Ok"
+                label: "OK"
                 Layout.fillWidth: true
                 Layout.minimumWidth: vpx(50)
                 Layout.preferredWidth: vpx(50)
@@ -77,10 +77,10 @@ FocusScope {
             ControllerHelpButton {
                 id: buttonFavorite
                 button: "btn_Y"
-                label: "Fav"
+                label: "Favourite"
                 Layout.fillWidth: true
-                Layout.minimumWidth: vpx(50)
-                Layout.preferredWidth: vpx(50)
+                Layout.minimumWidth: vpx(100)
+                Layout.preferredWidth: vpx(100)
                 visible: softwareScreen.focus || recentScreen.focus || favoritesScreen.focus
             }
             
@@ -98,10 +98,10 @@ FocusScope {
             ControllerHelpButton {
                 id: buttonNext
                 button: "btn_R"
-                label: "Next Collection"
+                label: "Next"
                 Layout.fillWidth: true
-                Layout.minimumWidth: vpx(175)
-                Layout.preferredWidth: widescreen ? vpx(175) : vpx(212)
+                Layout.minimumWidth: vpx(70)
+                Layout.preferredWidth: vpx(70)
 
                 onClicked: {
                     turnOnSfx.play();
@@ -119,10 +119,10 @@ FocusScope {
             ControllerHelpButton {
                 id: buttonPrev
                 button: "btn_L"
-                label: "Prev Collection"
-                Layout.fillWidth: true
-                Layout.minimumWidth: vpx(130)
-                Layout.preferredWidth: vpx(175)
+                label: "Previous"
+                Layout.fillWidth: false
+                Layout.minimumWidth: vpx(90)
+                Layout.preferredWidth: vpx(90)
 
                 onClicked: {
                     turnOffSfx.play();
