@@ -195,40 +195,43 @@ FocusScope {
                         
                     }
 
-                    Image{
-                        id: chargingIcon
+                    Row {
 
-                        property bool chargingStatus: api.device.batteryCharging
+                        Image{
+                            id: chargingIcon
 
-                        width: Math.round(screenheight * 0.0433)
-                        height: width
-                        fillMode: Image.PreserveAspectFit
-                        source: "../assets/images/charging.svg"
-                        sourceSize.width: 32
-                        sourceSize.height: 64
-                        smooth: true
-                        horizontalAlignment: Image.AlignLeft
-                        visible: chargingStatus && batteryIcon.level < 99
-                        layer.enabled: true
-                        layer.effect: ColorOverlay {
-                            color: theme.text
-                            antialiasing: true
-                            cached: true
+                            property bool chargingStatus: api.device.batteryCharging
+
+                            width: Math.round(screenheight * 0.0433)
+                            height: width
+                            fillMode: Image.PreserveAspectFit
+                            source: "../assets/images/charging.svg"
+                            sourceSize.width: 32
+                            sourceSize.height: 64
+                            smooth: true
+                            horizontalAlignment: Image.AlignLeft
+                            visible: chargingStatus && batteryIcon.level < 99
+                            layer.enabled: true
+                            layer.effect: ColorOverlay {
+                                color: theme.text
+                                antialiasing: true
+                                cached: true
+                            }
+
+                            function set() {
+                                chargingStatus = api.device.batteryCharging;
+                            }
+
+                            Timer {
+                                id: chargingIconTimer
+                                interval: 10000 // Run the timer every minute
+                                repeat: isNaN(api.device.batteryPercent) ? false : true
+                                running: isNaN(api.device.batteryPercent) ? false : true
+                                triggeredOnStart: isNaN(api.device.batteryPercent) ? false : true
+                                onTriggered: chargingIcon.set()
+                            }
+
                         }
-
-                        function set() {
-                            chargingStatus = api.device.batteryCharging;
-                        }
-
-                        Timer {
-                            id: chargingIconTimer
-                            interval: 10000 // Run the timer every minute
-                            repeat: isNaN(api.device.batteryPercent) ? false : true
-                            running: isNaN(api.device.batteryPercent) ? false : true
-                            triggeredOnStart: isNaN(api.device.batteryPercent) ? false : true
-                            onTriggered: chargingIcon.set()
-                        }
-
                     }
 
                 }
