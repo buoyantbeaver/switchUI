@@ -23,7 +23,7 @@ FocusScope {
 
     Image {
         id: buttonImg
-        width: Math.round(screenheight*0.04)
+        width: Math.round(screenheight*0.05)
         height: width
         source: "../assets/images/navigation/"+ button + ".png"
         sourceSize.width: 128
@@ -53,7 +53,7 @@ FocusScope {
 
         color: theme.text
         font.family: titleFont.name
-        font.pixelSize: Math.round(screenheight*0.025)
+        font.pixelSize: Math.round(screenheight*0.030)
         font.bold: true
         horizontalAlignment: Text.Right
     }

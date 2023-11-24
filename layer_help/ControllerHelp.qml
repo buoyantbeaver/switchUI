@@ -79,7 +79,7 @@ FocusScope {
                 button: "btn_Y"
                 label: "Favourite"
                 Layout.fillWidth: true
-                Layout.minimumWidth: vpx(100)
+                Layout.minimumWidth: vpx(85)
                 Layout.preferredWidth: vpx(100)
                 visible: softwareScreen.focus || recentScreen.focus || favoritesScreen.focus
             }
@@ -100,8 +100,8 @@ FocusScope {
                 button: "btn_R"
                 label: "Next"
                 Layout.fillWidth: true
-                Layout.minimumWidth: vpx(70)
-                Layout.preferredWidth: vpx(70)
+                Layout.minimumWidth: vpx(50)
+                Layout.preferredWidth: vpx(65)
 
                 onClicked: {
                     turnOnSfx.play();
@@ -121,7 +121,7 @@ FocusScope {
                 button: "btn_L"
                 label: "Previous"
                 Layout.fillWidth: true
-                Layout.minimumWidth: vpx(90)
+                Layout.minimumWidth: vpx(75)
                 Layout.preferredWidth: vpx(90)
 
                 onClicked: {

@@ -22,7 +22,7 @@ See [wiki](https://github.com/RBertoCases/skylineOS/wiki) for more information.
 ## Version history
 
 v0.1
-- Changed the button titles at the bottom bar to match my liking: Favourite, Previous, Next, OK,...
+- Changed the titles and size of the buttons to match my liking: Favourite, Previous, Next, OK,...
 - Changed games titles to unwrapped and slightly increased size
 - Fixed the bug where the battery sits higher than the rest
 - Fixed the bug in the recent screen where the selector keeps showing in the game row after moving to bottom row
