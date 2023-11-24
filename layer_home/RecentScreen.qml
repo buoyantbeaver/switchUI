@@ -28,13 +28,6 @@ FocusScope {
             for(var i=0; i<activeCollection.count; i++) {
                 append(createListElement(i));
             }
-
-            append({
-                "name":         "All Software",
-                "idx":          -3,
-                "icon":         "../assets/images/allsoft_icon.svg",
-                "background":   ""
-            });
         }
 
         function createListElement(i) {
