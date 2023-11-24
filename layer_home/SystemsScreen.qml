@@ -133,8 +133,11 @@ FocusScope {
                     horizontalAlignment: Text.Right
                     font.capitalization: Font.SmallCaps
                 }
-                Row{
-                    spacing: vpx(5)
+
+                RowLayout {
+                    anchors {
+                        bottom: parent.bottom;
+                    }
 
                     Text {
                         id: batteryPercentage
@@ -165,8 +168,8 @@ FocusScope {
 
                     BatteryIcon{
                         id: batteryIcon
-                        width: height * 1.5
-                        height: sysTime.paintedHeight
+                        width: Math.round(screenheight * 0.0433)
+                        height: width / 1.5
                         layer.enabled: true
                         layer.effect: ColorOverlay {
                             color: theme.text
@@ -197,8 +200,8 @@ FocusScope {
 
                         property bool chargingStatus: api.device.batteryCharging
 
-                        width: height/2
-                        height: sysTime.paintedHeight
+                        width: Math.round(screenheight * 0.0433)
+                        height: width
                         fillMode: Image.PreserveAspectFit
                         source: "../assets/images/charging.svg"
                         sourceSize.width: 32
