@@ -202,8 +202,8 @@ FocusScope {
 
                             property bool chargingStatus: api.device.batteryCharging
 
-                            width: Math.round(screenheight * 0.0433)
-                            height: width
+                            width: height / 2
+                            height: sysTime.paintedHeight
                             fillMode: Image.PreserveAspectFit
                             source: "../assets/images/charging.svg"
                             sourceSize.width: 32
