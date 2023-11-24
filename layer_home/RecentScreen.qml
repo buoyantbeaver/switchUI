@@ -34,7 +34,7 @@ FocusScope {
                 "idx":          -3,
                 "icon":         "../assets/images/allsoft_icon.svg",
                 "background":   ""
-            })
+            });
         }
 
         function createListElement(i) {
