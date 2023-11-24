@@ -190,6 +190,56 @@ id: root
                 width: ListView.view.width
                 height: itemheight
 
+                // square selector for left menu begins
+                Rectangle {
+                    id: hlBorder
+                    width: parent.width
+                    height: parent.height
+                    radius: vpx(3)
+                    color: theme.accent
+                    layer.enabled: enableDropShadows
+                    layer.effect: DropShadow {
+                        transparentBorder: true
+                        horizontalOffset: 0
+                        verticalOffset: 0
+                        color: "#4D000000"
+                        samples: 6
+                        z: -2
+                    }
+                    opacity: selected ? 0.5 : 0
+                    Behavior on opacity { NumberAnimation { duration: 75 } }
+
+                    // Highlight animation (ColorOverlay causes graphical glitches on W10)
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "white"//"#c0f0f3"
+                        radius: hlBorder.radius
+                        SequentialAnimation on opacity {
+                            id: colorAnim
+                            running: true
+                            loops: Animation.Infinite
+                            NumberAnimation { to: 0.5; duration: 400; easing { type: Easing.OutQuad } }
+                            NumberAnimation { to: 0; duration: 500; easing { type: Easing.InQuad } }
+                            PauseAnimation { duration: 200 }
+                        }
+                    }
+                    
+                    // Inner highlight
+                    Rectangle {
+                        anchors { 
+                            left: parent.left; leftMargin: vpx(5)
+                            right: parent.right; rightMargin: vpx(5)
+                            bottom: parent.bottom; bottomMargin: vpx(5)
+                            top: parent.top; topMargin: vpx(5)
+                        }
+                        anchors.centerIn: parent
+                        
+                        color: theme.main
+                        opacity: 1
+                    }
+                }
+                // square selector ends here
+
                 // Page name
                 Text {
                 id: pageNameText
@@ -198,9 +248,9 @@ id: root
                     color: theme.text
                     //font.family: subtitleFont.name
                     font.pixelSize: vpx(22)
-                    font.bold: true
+                    font.bold: false
                     verticalAlignment: Text.AlignVCenter
-                    opacity: selected ? 1 : 0.2
+                    opacity: 1
 
                     width: contentWidth
                     height: parent.height
@@ -310,21 +360,47 @@ id: root
                 width: ListView.view.width
                 height: itemheight
 
+
+                // square selector begins
+                Rectangle {
+                    anchors { 
+                        left: parent.left; leftMargin: vpx(25)
+                        right: parent.right; rightMargin: vpx(25)
+                        bottom: parent.bottom
+                    }
+                    color: theme.text
+                    opacity: selected ? 0.1 : 0
+                    height: parent.height
+                    width: parent.width
+                }
+
+                Rectangle {
+                    anchors { 
+                        left: parent.left; leftMargin: vpx(30)
+                        right: parent.right; rightMargin: vpx(30)
+                        bottom: parent.bottom; bottomMargin: vpx(5)
+                        top: parent.top; topMargin: vpx(5)
+                    }
+                    color: theme.main
+                    opacity: 1
+                }
+                // square selector ends, should be put above labels
+
                 // Setting name
                 Text {
                 id: settingNameText
                 
                     text: settingSubtitle != "" ? settingName + " " + settingSubtitle + ": " : settingName + ": "
-                    color: theme.text
+                    color: selected ? theme.accent : theme.text
                     //font.family: subtitleFont.name
                     font.pixelSize: vpx(20)
                     verticalAlignment: Text.AlignVCenter
-                    opacity: selected ? 1 : 0.2
+                    opacity: 1
 
                     width: contentWidth
                     height: parent.height
                     anchors {
-                        left: parent.left; leftMargin: vpx(25)
+                        left: parent.left; leftMargin: vpx(50)
                     }
                 }
                 // Setting value
@@ -336,23 +412,12 @@ id: root
                     //font.family: subtitleFont.name
                     font.pixelSize: vpx(20)
                     verticalAlignment: Text.AlignVCenter
-                    opacity: selected ? 1 : 0.2
+                    opacity: 1
 
                     height: parent.height
                     anchors {
-                        right: parent.right; rightMargin: vpx(25)
+                        right: parent.right; rightMargin: vpx(50)
                     }
-                }
-
-                Rectangle {
-                    anchors { 
-                        left: parent.left; leftMargin: vpx(25)
-                        right: parent.right; rightMargin: vpx(25)
-                        bottom: parent.bottom
-                    }
-                    color: theme.text
-                    opacity: selected ? 0.1 : 0
-                    height: vpx(1)
                 }
 
                 // Input handling

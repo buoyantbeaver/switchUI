@@ -21,6 +21,9 @@ See [wiki](https://github.com/RBertoCases/skylineOS/wiki) for more information.
 
 ## Version history
 
+v0.2
+- Changed font weight, colours and selector in Theme Settings to match with the rest
+
 v0.1
 - Changed the titles and size of the buttons to match my liking: Favourite, Previous, Next, OK,...
 - Changed games titles to unwrapped and slightly increased size
