@@ -120,7 +120,7 @@ FocusScope {
                 id: buttonPrev
                 button: "btn_L"
                 label: "Previous"
-                Layout.fillWidth: false
+                Layout.fillWidth: true
                 Layout.minimumWidth: vpx(90)
                 Layout.preferredWidth: vpx(90)
 

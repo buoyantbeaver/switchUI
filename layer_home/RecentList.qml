@@ -202,8 +202,8 @@ ListView {
                     }
                     else
                         navSound.play();
-                        homeSwitcher.currentIndex = index
-                        homeSwitcher.focus = true
+                        recentSwitcher.currentIndex = index
+                        recentSwitcher.focus = true
                         buttonMenu.focus = false
 
                 }
@@ -273,7 +273,7 @@ ListView {
         _index = currentIndex;
         navSound.play();
         allSoftwareButton.focus = true
-        homeSwitcher.currentIndex = -1
+        recentSwitcher.currentIndex = -1
     }
 
     function gotoSoftware() {
