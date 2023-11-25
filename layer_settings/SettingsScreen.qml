@@ -188,24 +188,88 @@ id: root
                 property bool selected: ListView.isCurrentItem
 
                 width: ListView.view.width
-                height: itemheight
+                height: itemheight + vpx(15)
+
+                // square selector for left menu begins
+                Rectangle {
+                    id: hlBorder
+                    width: parent.width
+                    height: parent.height
+                    radius: vpx(3)
+                    color: theme.accent
+                    layer.enabled: enableDropShadows
+                    layer.effect: DropShadow {
+                        transparentBorder: true
+                        horizontalOffset: 0
+                        verticalOffset: 0
+                        color: "#4D000000"
+                        samples: 6
+                        z: -2
+                    }
+
+                    opacity: selected && !settingsList.focus ? 0.5 : 0
+                    Behavior on opacity { NumberAnimation { duration: 75 } }
+
+                    // Highlight animation (ColorOverlay causes graphical glitches on W10)
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "white"//"#c0f0f3"
+                        radius: hlBorder.radius
+                        SequentialAnimation on opacity {
+                            id: colorAnim
+                            running: true
+                            loops: Animation.Infinite
+                            NumberAnimation { to: 0.5; duration: 400; easing { type: Easing.OutQuad } }
+                            NumberAnimation { to: 0; duration: 500; easing { type: Easing.InQuad } }
+                            PauseAnimation { duration: 200 }
+                        }
+                    }
+                }
+                    
+                    // Inner highlight
+                Rectangle {
+                    anchors { 
+                        left: parent.left; leftMargin: vpx(4)
+                        right: parent.right; rightMargin: vpx(4)
+                        bottom: parent.bottom; bottomMargin: vpx(4)
+                        top: parent.top; topMargin: vpx(4)
+                    }
+                    
+                    color: "#202226"
+                    opacity: selected && !settingsList.focus ? 1 : 0
+                }
+                // square selector ends here
+
+                // Active indicator begins
+                Rectangle {
+                    anchors {
+                        left: parent.left; leftMargin: vpx(10)
+                        bottom: parent.bottom; bottomMargin: vpx(10)
+                        top: parent.top; topMargin: vpx(10)
+                    }
+                    width: vpx(4)
+                    height: parent.height
+                    color: theme.accent
+                    opacity: selected ? 1 : 0
+                }
+                // Active indicator ends
 
                 // Page name
                 Text {
                 id: pageNameText
                 
                     text: modelData.pageName
-                    color: theme.text
+                    color: selected ? theme.accent : theme.text
                     //font.family: subtitleFont.name
                     font.pixelSize: vpx(22)
-                    font.bold: true
+                    font.bold: false
                     verticalAlignment: Text.AlignVCenter
-                    opacity: selected ? 1 : 0.2
+                    opacity: 1
 
                     width: contentWidth
                     height: parent.height
                     anchors {
-                        left: parent.left; leftMargin: vpx(25)
+                        left: parent.left; leftMargin: vpx(20)
                     }
                 }
 
@@ -220,7 +284,6 @@ id: root
                         settingsList.focus = true;
                     }
                 }
-
             }
         } 
 
@@ -308,7 +371,59 @@ id: root
                 }
 
                 width: ListView.view.width
-                height: itemheight
+                height: itemheight + vpx(10)
+
+
+                // square selector begins
+                Rectangle {
+                    anchors { 
+                        left: parent.left; leftMargin: vpx(25)
+                        right: parent.right; rightMargin: vpx(25)
+                        bottom: parent.bottom
+                    }
+                    color: theme.accent
+                    height: parent.height
+                    width: parent.white
+                    radius: vpx(3)
+                    layer.enabled: enableDropShadows
+                    layer.effect: DropShadow {
+                        transparentBorder: true
+                        horizontalOffset: 0
+                        verticalOffset: 0
+                        color: "#4D000000"
+                        samples: 6
+                        z: -2
+                    }
+                    opacity: selected ? 0.5 : 0
+                    Behavior on opacity { NumberAnimation { duration: 75 } }
+                    
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "white"//"#c0f0f3"
+                        radius: vpx(3)
+                        SequentialAnimation on opacity {
+                            id: colorAnim
+                            running: true
+                            loops: Animation.Infinite
+                            NumberAnimation { to: 0.5; duration: 400; easing { type: Easing.OutQuad } }
+                            NumberAnimation { to: 0; duration: 500; easing { type: Easing.InQuad } }
+                            PauseAnimation { duration: 200 }
+                        }
+                    }
+
+                }
+
+                Rectangle {
+                    anchors { 
+                        left: parent.left; leftMargin: vpx(29)
+                        right: parent.right; rightMargin: vpx(29)
+                        bottom: parent.bottom; bottomMargin: vpx(4)
+                        top: parent.top; topMargin: vpx(4)
+                    }
+                    color: "#202226"
+                    opacity: selected ? 1 : 0
+                }
+                // square selector ends, should be put above labels
 
                 // Setting name
                 Text {
@@ -319,12 +434,12 @@ id: root
                     //font.family: subtitleFont.name
                     font.pixelSize: vpx(20)
                     verticalAlignment: Text.AlignVCenter
-                    opacity: selected ? 1 : 0.2
+                    opacity: 1
 
                     width: contentWidth
                     height: parent.height
                     anchors {
-                        left: parent.left; leftMargin: vpx(25)
+                        left: parent.left; leftMargin: vpx(50)
                     }
                 }
                 // Setting value
@@ -332,27 +447,16 @@ id: root
                 id: settingtext; 
                 
                     text: settingList[savedIndex]; 
-                    color: theme.accent
+                    color: selected ? theme.accent : theme.text
                     //font.family: subtitleFont.name
                     font.pixelSize: vpx(20)
                     verticalAlignment: Text.AlignVCenter
-                    opacity: selected ? 1 : 0.2
+                    opacity: 1
 
                     height: parent.height
                     anchors {
-                        right: parent.right; rightMargin: vpx(25)
+                        right: parent.right; rightMargin: vpx(50)
                     }
-                }
-
-                Rectangle {
-                    anchors { 
-                        left: parent.left; leftMargin: vpx(25)
-                        right: parent.right; rightMargin: vpx(25)
-                        bottom: parent.bottom
-                    }
-                    color: theme.text
-                    opacity: selected ? 0.1 : 0
-                    height: vpx(1)
                 }
 
                 // Input handling
@@ -401,6 +505,19 @@ id: root
                             settingsList.currentIndex = index;
                         }
                     }
+                }
+                
+
+                Rectangle {
+                    y: parent.height - vpx(1)
+                    anchors { 
+                        left: parent.left; leftMargin: vpx(25)
+                        right: parent.right; rightMargin: vpx(25)
+                        bottom: parent.bottom
+                    }
+                    height: 1
+                    color: theme.text
+                    opacity: 0.1
                 }
             }
         } 

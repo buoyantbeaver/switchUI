@@ -508,7 +508,7 @@ FocusScope {
                             font.bold: true
                             font.family: titleFont.name
                             //horizontalAlignment: Text.AlignHCenter
-                            wrapMode: Text.NoWrap
+                            wrapMode: Text.wordWrap
                             
                             anchors {
                                 verticalCenter: parent.verticalCenter
@@ -518,7 +518,7 @@ FocusScope {
                         }
 
                         Component.onCompleted: {
-                            if (gameTitle.wordWrap === Text.WordWrap) {
+                            if (wordWrap) {
                                 if (gameTitle.paintedWidth > gameImage.width * 1.75) {
                                     gameTitle.width = gameImage.width * 1.5 - vpx(54)
                                     titleBubble.height = titleBubble.height * 1.5
