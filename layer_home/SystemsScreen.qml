@@ -46,6 +46,17 @@ FocusScope {
         height: parent.height
 
         property var batteryStatus: isNaN(api.device.batteryPercent) ? "" : parseInt(api.device.batteryPercent*100);
+        
+        Keys.onPressed: {
+            if (event.isAutoRepeat)
+                return;
+            // B: Go back
+            if (api.keys.isCancel(event)) {
+                event.accepted = true;
+                showRecentScreen();
+                return;
+            }
+        }
 
         Item {
             id: topbar

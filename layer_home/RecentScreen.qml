@@ -54,10 +54,24 @@ FocusScope {
 
         property var batteryStatus: isNaN(api.device.batteryPercent) ? "" : parseInt(api.device.batteryPercent*100);
 
-        Item {
-        id: topbar
+        Keys.onPressed: {
+            if (event.isAutoRepeat)
+                return;
+            // B: Go back
+            if (api.keys.isCancel(event)) {
+                event.accepted = true;
+                recentSwitcher.focus = true
+                if (recentSwitcher.currentIndex != 8) {
+                    recentSwitcher.currentIndex = 8
+                } else {
+                    recentSwitcher.currentIndex = 0
+                }
+                return;
+            }
+        }
 
-            
+        Item {
+            id: topbar            
             height: Math.round(screenheight * 0.2569)
             anchors {
                 left: parent.left; leftMargin: vpx(60)

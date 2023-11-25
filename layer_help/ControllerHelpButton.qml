@@ -54,7 +54,7 @@ FocusScope {
         color: theme.text
         font.family: titleFont.name
         font.pixelSize: Math.round(screenheight*0.040)
-        font.bold: true
+        font.bold: false
         horizontalAlignment: Text.Right
     }
 
