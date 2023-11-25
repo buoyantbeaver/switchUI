@@ -174,7 +174,8 @@ ListView {
     Keys.onDownPressed: {
         _index = currentIndex;
         navSound.play();
-        allSoftwareButton.focus = true
+        // allSoftwareButton.focus = true
+        favoriteButton.focus = true
         homeSwitcher.currentIndex = -1
     }
 

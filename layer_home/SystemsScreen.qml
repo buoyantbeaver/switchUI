@@ -275,41 +275,41 @@ FocusScope {
 
             x: parent.width/2 - buttonMenu.width/2
             
-            MenuButton {
-                id: allSoftwareButton
-                width: vpx(86); height: vpx(100)
-                label: "All Software"
-                autoColor: false
-                icon: "../assets/images/allsoft_icon_blue.svg"
+            // MenuButton {
+            //     id: allSoftwareButton
+            //     width: vpx(86); height: vpx(100)
+            //     label: "All Software"
+            //     autoColor: false
+            //     icon: "../assets/images/allsoft_icon_blue.svg"
 
-                Keys.onPressed: {
-                    if (api.keys.isAccept(event) && !event.isAutoRepeat) {
-                        event.accepted = true;
-                        selectSfx.play();
-                        showSoftwareScreen();
-                    }
-                }
+            //     Keys.onPressed: {
+            //         if (api.keys.isAccept(event) && !event.isAutoRepeat) {
+            //             event.accepted = true;
+            //             selectSfx.play();
+            //             showSoftwareScreen();
+            //         }
+            //     }
 
-                Keys.onLeftPressed:{
-                    borderSfx.play();
-                }
+            //     Keys.onLeftPressed:{
+            //         borderSfx.play();
+            //     }
 
-                Keys.onRightPressed:{
-                    navSound.play();
-                    favoriteButton.focus = true
-                }
+            //     Keys.onRightPressed:{
+            //         navSound.play();
+            //         favoriteButton.focus = true
+            //     }
 
-                onClicked: {
-                    if (allSoftwareButton.focus) {
-                        selectSfx.play();
-                        showSoftwareScreen();
-                    }
-                    else
-                        allSoftwareButton.focus = true;
-                        navSound.play();
-                        homeSwitcher.currentIndex = -1;
-                }
-            }
+            //     onClicked: {
+            //         if (allSoftwareButton.focus) {
+            //             selectSfx.play();
+            //             showSoftwareScreen();
+            //         }
+            //         else
+            //             allSoftwareButton.focus = true;
+            //             navSound.play();
+            //             homeSwitcher.currentIndex = -1;
+            //     }
+            // }
             
             MenuButton {
                 id: favoriteButton
@@ -328,7 +328,8 @@ FocusScope {
 
                 Keys.onLeftPressed:{
                     navSound.play();
-                    allSoftwareButton.focus = true
+                    // allSoftwareButton.focus = true
+                    settingsButton.focus = true
                 }
 
                 Keys.onRightPressed:{
@@ -401,7 +402,7 @@ FocusScope {
 
                 Keys.onLeftPressed:{
                     navSound.play();
-                    favoriteButton.focus = true
+                    recentButton.focus = true
                 }
 
                 Keys.onRightPressed:{
@@ -442,6 +443,7 @@ FocusScope {
 
                 Keys.onRightPressed:{
                     borderSfx.play();
+                    favoriteButton.focus = true
                 }
                 onClicked: {
                     if (settingsButton.focus) {

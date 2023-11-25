@@ -101,7 +101,7 @@ ListView {
                     height: width
                     radius: width/2
                     color: theme.accent
-                    visible: gameData.favorite
+                    visible: isGame && gameData.favorite
                     Image {
                         id: faviconImage
                         source: "../assets/images/heart_filled.png"
@@ -272,7 +272,8 @@ ListView {
     Keys.onDownPressed: {
         _index = currentIndex;
         navSound.play();
-        allSoftwareButton.focus = true
+        // allSoftwareButton.focus = true
+        favoriteButton.focus = true
         recentSwitcher.currentIndex = -1
     }
 
