@@ -177,7 +177,7 @@ ListView {
                 horizontalAlignment : Text.AlignHCenter
                 font.family: titleFont.name
                 color: theme.text
-                font.pixelSize: Math.round(screenheight*0.025)
+                font.pixelSize: Math.round(screenheight*0.045)
                 font.bold: true
 
                 anchors.centerIn: gameImage
@@ -214,7 +214,7 @@ ListView {
                 text: idx > -1 ? gameData.title : name
                 color: theme.accent
                 font.family: titleFont.name
-                font.pixelSize: Math.round(screenheight*0.035)
+                font.pixelSize: Math.round(screenheight*0.045)
                 font.weight: Font.DemiBold
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap

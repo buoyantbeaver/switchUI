@@ -112,7 +112,7 @@ Item {
         text: label
         color: theme.accent
         font.family: titleFont.name
-        font.pixelSize: Math.round(screenheight*0.0277)
+        font.pixelSize: Math.round(screenheight*0.0377)
         font.bold: false
         anchors {
             top: highlight.bottom; topMargin: vpx(8)

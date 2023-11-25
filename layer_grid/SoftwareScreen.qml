@@ -138,7 +138,7 @@ FocusScope {
                     text: currentCollection == -1 ? "All Software" : api.collections.get(currentCollection).name
                     color: theme.text
                     font.family: titleFont.name
-                    font.pixelSize: Math.round(screenheight*0.0277)
+                    font.pixelSize: Math.round(screenheight*0.0477)
                     font.bold: true
                     anchors {
                         verticalCenter: headerIcon.verticalCenter
@@ -163,7 +163,7 @@ FocusScope {
 
                 Image {
                     id: sortIcon
-                    width: Math.round(screenheight*0.04)
+                    width: Math.round(screenheight*0.06)
                     height: width
                     source: "../assets/images/navigation/btn_RT.png"
                     sourceSize.width: 64
@@ -194,7 +194,7 @@ FocusScope {
                     color: theme.text
                     font.family: titleFont.name
                     font.weight: Font.Thin
-                    font.pixelSize: Math.round(screenheight*0.02)
+                    font.pixelSize: Math.round(screenheight*0.035)
                     horizontalAlignment: Text.Right
                 }
 
@@ -466,7 +466,7 @@ FocusScope {
                             height: parent.height
                             font.family: titleFont.name
                             color: theme.text
-                            font.pixelSize: Math.round(screenheight*0.0194)
+                            font.pixelSize: Math.round(screenheight*0.0294)
                             font.bold: true
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
@@ -504,7 +504,7 @@ FocusScope {
                             id: gameTitle
                             text: sortByIndex == 3 ? modelData.publisher + " / " + modelData.title : modelData.title
                             color: theme.accent
-                            font.pixelSize: Math.round(screenheight*0.0322)
+                            font.pixelSize: Math.round(screenheight*0.0422)
                             font.bold: true
                             font.family: titleFont.name
                             //horizontalAlignment: Text.AlignHCenter

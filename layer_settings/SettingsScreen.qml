@@ -135,7 +135,7 @@ id: root
                 text: "Theme Settings"
                 color: theme.text
                 font.family: titleFont.name
-                font.pixelSize: Math.round(screenheight*0.0277)
+                font.pixelSize: Math.round(screenheight*0.0477)
                 font.bold: true
                 anchors {
                     verticalCenter: headerIcon.verticalCenter
@@ -260,8 +260,8 @@ id: root
                 
                     text: modelData.pageName
                     color: selected ? theme.accent : theme.text
-                    //font.family: subtitleFont.name
-                    font.pixelSize: vpx(22)
+                    font.family: titleFont.name
+                    font.pixelSize: Math.round(screenheight*0.035)
                     font.bold: false
                     verticalAlignment: Text.AlignVCenter
                     opacity: 1
@@ -431,8 +431,8 @@ id: root
                 
                     text: settingSubtitle != "" ? settingName + " " + settingSubtitle + ": " : settingName + ": "
                     color: theme.text
-                    //font.family: subtitleFont.name
-                    font.pixelSize: vpx(20)
+                    font.family: titleFont.name
+                    font.pixelSize: Math.round(screenheight*0.035)
                     verticalAlignment: Text.AlignVCenter
                     opacity: 1
 
@@ -448,8 +448,8 @@ id: root
                 
                     text: settingList[savedIndex]; 
                     color: theme.accent
-                    //font.family: subtitleFont.name
-                    font.pixelSize: vpx(20)
+                    font.family: titleFont.name
+                    font.pixelSize: Math.round(screenheight*0.035)
                     verticalAlignment: Text.AlignVCenter
                     opacity: 1
 

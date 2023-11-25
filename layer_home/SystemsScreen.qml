@@ -86,7 +86,7 @@ FocusScope {
                 text: ""
                 color: theme.text
                 font.family: titleFont.name
-                font.pixelSize: Math.round(screenheight*0.0277)
+                font.pixelSize: Math.round(screenheight*0.0377)
                 font.bold: true
                 anchors {
                     verticalCenter: profileIcon.verticalCenter
@@ -129,7 +129,7 @@ FocusScope {
                     font.family: titleFont.name
                     font.weight: Font.Bold
                     font.letterSpacing: 4
-                    font.pixelSize: Math.round(screenheight*0.0277)
+                    font.pixelSize: Math.round(screenheight*0.0377)
                     horizontalAlignment: Text.Right
                     font.capitalization: Font.SmallCaps
                 }
@@ -159,7 +159,7 @@ FocusScope {
                         font.family: titleFont.name
                         font.weight: Font.Bold
                         font.letterSpacing: 1
-                        font.pixelSize: Math.round(screenheight*0.0277)
+                        font.pixelSize: Math.round(screenheight*0.0377)
                         horizontalAlignment: Text.Right
                         Component.onCompleted: font.capitalization = Font.SmallCaps
                         //font.capitalization: Font.SmallCaps

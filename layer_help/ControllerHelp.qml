@@ -57,8 +57,8 @@ FocusScope {
                 button: "btn_A"
                 label: "OK"
                 Layout.fillWidth: true
-                Layout.minimumWidth: vpx(50)
-                Layout.preferredWidth: vpx(50)
+                Layout.minimumWidth: vpx(40)
+                Layout.preferredWidth: vpx(40)
             }
             
             ControllerHelpButton {
@@ -79,8 +79,8 @@ FocusScope {
                 button: "btn_Y"
                 label: "Favourite"
                 Layout.fillWidth: true
-                Layout.minimumWidth: vpx(85)
-                Layout.preferredWidth: vpx(100)
+                Layout.minimumWidth: vpx(95)
+                Layout.preferredWidth: vpx(120)
                 visible: softwareScreen.focus || recentScreen.focus || favoritesScreen.focus
             }
             
@@ -89,7 +89,7 @@ FocusScope {
                 button: "btn_X"
                 label: "Zoom"
                 Layout.fillWidth: true
-                Layout.minimumWidth: vpx(50)
+                Layout.minimumWidth: vpx(60)
                 Layout.preferredWidth: vpx(75)
                 visible: softwareScreen.focus || favoritesScreen.focus
             }

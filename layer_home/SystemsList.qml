@@ -116,7 +116,7 @@ ListView {
                 text: systemData.name // name
                 color: theme.accent
                 font.family: titleFont.name
-                font.pixelSize: Math.round(screenheight*0.035)
+                font.pixelSize: Math.round(screenheight*0.045)
                 font.weight: Font.DemiBold
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap

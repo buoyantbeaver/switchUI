@@ -142,7 +142,7 @@ FocusScope {
     }
 
     // Theme settings
-    FontLoader { id: titleFont; source: "assets/fonts/Nintendo_Switch_UI_Font.ttf" }
+    FontLoader { id: titleFont; source: "assets/fonts/SwitchUI.otf" }
 
     property var themeLight: {
         return {
