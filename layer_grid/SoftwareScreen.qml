@@ -55,14 +55,14 @@ FocusScope {
             // B: Go back
             if (api.keys.isCancel(event)) {
                 event.accepted = true;
-                if (settings.homeView == "Recent"){
+                if (currentCollection == -1){
                     showRecentScreen();
                 } else {
                     showSystemsScreen();
                 }
                 return;
             }
-            // Y: Zoom
+            // X: Zoom
             if (api.keys.isFilters(event)) {
                 event.accepted = true;
                 if (numcolumns < numcolumnsMax){
@@ -103,7 +103,7 @@ FocusScope {
                     nextCollection--;
                 }
             }
-            }
+        }
 
         SequentialAnimation {
             id: na
@@ -505,7 +505,7 @@ FocusScope {
                             text: sortByIndex == 3 ? modelData.publisher + " / " + modelData.title : modelData.title
                             color: theme.accent
                             font.pixelSize: Math.round(screenheight*0.0422)
-                            font.bold: true
+                            font.bold: false
                             font.family: titleFont.name
                             //horizontalAlignment: Text.AlignHCenter
                             wrapMode: Text.wordWrap

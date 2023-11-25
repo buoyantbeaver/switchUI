@@ -475,8 +475,8 @@ FocusScope {
                             id: gameTitle
                             text: sortByIndex == 3 ? modelData.publisher + " / " + modelData.title : modelData.title
                             color: theme.accent
-                            font.pixelSize: Math.round(screenheight*0.0222)
-                            font.bold: true
+                            font.pixelSize: Math.round(screenheight*0.0422)
+                            font.bold: false
                             font.family: titleFont.name
                             //horizontalAlignment: Text.AlignHCenter
                             wrapMode: Text.WordWrap
