@@ -104,7 +104,7 @@ id: root
         }
     }
 
-    property var settingsArr: [generalPage, homePage, performancePage, themeSettingsPage]
+    property var settingsArr: [generalPage, homePage, performancePage]
 
     property real itemheight: vpx(50)
 
