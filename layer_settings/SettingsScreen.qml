@@ -17,13 +17,13 @@ id: root
         ListElement {
             settingName: "Background Music"
             settingSubtitle: "(Requires Reload)"
-            setting: "Off,On"
+            setting: "No,Yes"
         }
 
         ListElement {
             settingName: "Word Wrap on Titles"
             settingSubtitle: "(Requires Reload)"
-            setting: "On,Off"
+            setting: "Yes,No"
         }
         
 
@@ -51,7 +51,7 @@ id: root
         ListElement {
             settingName: "Display Battery Percentage"
             settingSubtitle: "(%)"
-            setting: "Off,On"
+            setting: "No,Yes"
         }
         ListElement {
             settingName: "Number of recent games"
@@ -72,7 +72,7 @@ id: root
         ListElement {
             settingName: "Enable DropShadows"
             settingSubtitle: ""
-            setting: "On, Off"
+            setting: "Yes, No"
         }
     }
 
