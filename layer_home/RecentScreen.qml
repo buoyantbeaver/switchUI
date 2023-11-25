@@ -158,9 +158,6 @@ FocusScope {
                 }
 
                 RowLayout {
-                    anchors {
-                        bottom: parent.bottom;
-                    }
 
                     Text {
                         id: batteryPercentage
@@ -470,6 +467,7 @@ FocusScope {
                 }
                 onClicked: {
                     if (settingsButton.focus) {
+                        requestQuit();
                         showSettingsScreen();
                     }
                     else

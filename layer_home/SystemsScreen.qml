@@ -146,9 +146,7 @@ FocusScope {
                 }
 
                 RowLayout {
-                    anchors {
-                        bottom: parent.bottom;
-                    }
+                    Layout.alignment: Qt.AlignTop | Qt.AlignLeft
 
                     Text {
                         id: batteryPercentage

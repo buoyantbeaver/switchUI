@@ -508,7 +508,7 @@ FocusScope {
                             font.bold: false
                             font.family: titleFont.name
                             //horizontalAlignment: Text.AlignHCenter
-                            wrapMode: Text.wordWrap
+                            wrapMode: Text.WordWrap
                             
                             anchors {
                                 verticalCenter: parent.verticalCenter
