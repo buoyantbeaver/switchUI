@@ -188,7 +188,7 @@ id: root
                 property bool selected: ListView.isCurrentItem
 
                 width: ListView.view.width
-                height: itemheight
+                height: itemheight + vpx(15)
 
                 // square selector for left menu begins
                 Rectangle {
@@ -206,7 +206,8 @@ id: root
                         samples: 6
                         z: -2
                     }
-                    opacity: selected ? 0.5 : 0
+
+                    opacity: selected && !settingsList.focus ? 0.5 : 0
                     Behavior on opacity { NumberAnimation { duration: 75 } }
 
                     // Highlight animation (ColorOverlay causes graphical glitches on W10)
@@ -223,29 +224,42 @@ id: root
                             PauseAnimation { duration: 200 }
                         }
                     }
+                }
                     
                     // Inner highlight
-                    Rectangle {
-                        anchors { 
-                            left: parent.left; leftMargin: vpx(5)
-                            right: parent.right; rightMargin: vpx(5)
-                            bottom: parent.bottom; bottomMargin: vpx(5)
-                            top: parent.top; topMargin: vpx(5)
-                        }
-                        anchors.centerIn: parent
-                        
-                        color: theme.main
-                        opacity: 1
+                Rectangle {
+                    anchors { 
+                        left: parent.left; leftMargin: vpx(4)
+                        right: parent.right; rightMargin: vpx(4)
+                        bottom: parent.bottom; bottomMargin: vpx(4)
+                        top: parent.top; topMargin: vpx(4)
                     }
+                    
+                    color: "#202226"
+                    opacity: selected && !settingsList.focus ? 1 : 0
                 }
                 // square selector ends here
+
+                // Active indicator begins
+                Rectangle {
+                    anchors {
+                        left: parent.left; leftMargin: vpx(10)
+                        bottom: parent.bottom; bottomMargin: vpx(10)
+                        top: parent.top; topMargin: vpx(10)
+                    }
+                    width: vpx(4)
+                    height: parent.height
+                    color: theme.accent
+                    opacity: selected ? 1 : 0
+                }
+                // Active indicator ends
 
                 // Page name
                 Text {
                 id: pageNameText
                 
                     text: modelData.pageName
-                    color: theme.text
+                    color: selected ? theme.accent : theme.text
                     //font.family: subtitleFont.name
                     font.pixelSize: vpx(22)
                     font.bold: false
@@ -255,7 +269,7 @@ id: root
                     width: contentWidth
                     height: parent.height
                     anchors {
-                        left: parent.left; leftMargin: vpx(25)
+                        left: parent.left; leftMargin: vpx(20)
                     }
                 }
 
@@ -270,7 +284,6 @@ id: root
                         settingsList.focus = true;
                     }
                 }
-
             }
         } 
 
@@ -358,7 +371,7 @@ id: root
                 }
 
                 width: ListView.view.width
-                height: itemheight
+                height: itemheight + vpx(10)
 
 
                 // square selector begins
@@ -368,21 +381,47 @@ id: root
                         right: parent.right; rightMargin: vpx(25)
                         bottom: parent.bottom
                     }
-                    color: theme.text
-                    opacity: selected ? 0.1 : 0
+                    color: theme.accent
                     height: parent.height
-                    width: parent.width
+                    width: parent.white
+                    radius: vpx(3)
+                    layer.enabled: enableDropShadows
+                    layer.effect: DropShadow {
+                        transparentBorder: true
+                        horizontalOffset: 0
+                        verticalOffset: 0
+                        color: "#4D000000"
+                        samples: 6
+                        z: -2
+                    }
+                    opacity: selected ? 0.5 : 0
+                    Behavior on opacity { NumberAnimation { duration: 75 } }
+                    
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "white"//"#c0f0f3"
+                        radius: vpx(3)
+                        SequentialAnimation on opacity {
+                            id: colorAnim
+                            running: true
+                            loops: Animation.Infinite
+                            NumberAnimation { to: 0.5; duration: 400; easing { type: Easing.OutQuad } }
+                            NumberAnimation { to: 0; duration: 500; easing { type: Easing.InQuad } }
+                            PauseAnimation { duration: 200 }
+                        }
+                    }
+
                 }
 
                 Rectangle {
                     anchors { 
-                        left: parent.left; leftMargin: vpx(30)
-                        right: parent.right; rightMargin: vpx(30)
-                        bottom: parent.bottom; bottomMargin: vpx(5)
-                        top: parent.top; topMargin: vpx(5)
+                        left: parent.left; leftMargin: vpx(29)
+                        right: parent.right; rightMargin: vpx(29)
+                        bottom: parent.bottom; bottomMargin: vpx(4)
+                        top: parent.top; topMargin: vpx(4)
                     }
-                    color: theme.main
-                    opacity: 1
+                    color: "#202226"
+                    opacity: selected ? 1 : 0
                 }
                 // square selector ends, should be put above labels
 
@@ -391,7 +430,7 @@ id: root
                 id: settingNameText
                 
                     text: settingSubtitle != "" ? settingName + " " + settingSubtitle + ": " : settingName + ": "
-                    color: selected ? theme.accent : theme.text
+                    color: theme.text
                     //font.family: subtitleFont.name
                     font.pixelSize: vpx(20)
                     verticalAlignment: Text.AlignVCenter
@@ -408,7 +447,7 @@ id: root
                 id: settingtext; 
                 
                     text: settingList[savedIndex]; 
-                    color: theme.accent
+                    color: selected ? theme.accent : theme.text
                     //font.family: subtitleFont.name
                     font.pixelSize: vpx(20)
                     verticalAlignment: Text.AlignVCenter
@@ -466,6 +505,19 @@ id: root
                             settingsList.currentIndex = index;
                         }
                     }
+                }
+                
+
+                Rectangle {
+                    y: parent.height - vpx(1)
+                    anchors { 
+                        left: parent.left; leftMargin: vpx(25)
+                        right: parent.right; rightMargin: vpx(25)
+                        bottom: parent.bottom
+                    }
+                    height: 1
+                    color: theme.text
+                    opacity: 0.1
                 }
             }
         } 
