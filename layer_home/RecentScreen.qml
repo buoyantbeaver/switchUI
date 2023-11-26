@@ -61,9 +61,11 @@ FocusScope {
             if (api.keys.isCancel(event)) {
                 event.accepted = true;
                 recentSwitcher.focus = true
-                if (recentSwitcher.currentIndex != 8) {
-                    recentSwitcher.currentIndex = 8
+                if (recentSwitcher.currentIndex != recentSwitcher.count - 1) {
+                    navSound.play();
+                    recentSwitcher.currentIndex = recentSwitcher.count - 1
                 } else {
+                    navSound.play();
                     recentSwitcher.currentIndex = 0
                 }
                 return;

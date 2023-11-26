@@ -53,6 +53,7 @@ FocusScope {
             // B: Go back
             if (api.keys.isCancel(event)) {
                 event.accepted = true;
+                navSound.play();
                 showRecentScreen();
                 return;
             }
