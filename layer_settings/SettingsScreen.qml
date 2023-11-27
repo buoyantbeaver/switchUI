@@ -6,7 +6,7 @@ FocusScope {
 id: root
 
     ListModel {
-    id: settingsModel
+        id: settingsModel
 
         ListElement {
             settingName: "Game Background"
@@ -17,13 +17,13 @@ id: root
         ListElement {
             settingName: "Background Music"
             settingSubtitle: "(Requires Reload)"
-            setting: "No,Yes"
+            setting: "Off,On"
         }
 
         ListElement {
             settingName: "Word Wrap on Titles"
             settingSubtitle: "(Requires Reload)"
-            setting: "Yes,No"
+            setting: "On,Off"
         }
         
 
@@ -51,7 +51,7 @@ id: root
         ListElement {
             settingName: "Display Battery Percentage"
             settingSubtitle: "(%)"
-            setting: "No,Yes"
+            setting: "Off,On"
         }
         ListElement {
             settingName: "Number of recent games"
@@ -72,7 +72,7 @@ id: root
         ListElement {
             settingName: "Enable DropShadows"
             settingSubtitle: ""
-            setting: "Yes, No"
+            setting: "On, Off"
         }
     }
 
@@ -169,7 +169,7 @@ id: root
     }
 
     ListView {
-    id: pagelist
+        id: pagelist
     
         focus: true
         anchors {
@@ -320,7 +320,7 @@ id: root
     }
 
     ListView {
-    id: settingsList
+        id: settingsList
 
         model: settingsArr[pagelist.currentIndex].listmodel
         delegate: settingsDelegate

@@ -22,10 +22,10 @@ FocusScope {
         return {
             gameBackground:         api.memory.has("Game Background") ? api.memory.get("Game Background") : "Screenshot",
             timeFormat:             api.memory.has("Time Format") ? api.memory.get("Time Format") : "12hr",
-            wordWrap:               api.memory.has("Word Wrap on Titles") ? api.memory.get("Word Wrap on Titles") : "Yes",
-            batteryPercentSetting:  api.memory.has("Display Battery Percentage") ? api.memory.get("Display Battery Percentage") : "No",
-            enableDropShadows:      api.memory.has("Enable DropShadows") ? api.memory.get("Enable DropShadows") : "Yes",
-            playBGM:                api.memory.has("Background Music") ? api.memory.get("Background Music") : "No",
+            wordWrap:               api.memory.has("Word Wrap on Titles") ? api.memory.get("Word Wrap on Titles") : "On",
+            batteryPercentSetting:  api.memory.has("Display Battery Percentage") ? api.memory.get("Display Battery Percentage") : "Off",
+            enableDropShadows:      api.memory.has("Enable DropShadows") ? api.memory.get("Enable DropShadows") : "On",
+            playBGM:                api.memory.has("Background Music") ? api.memory.get("Background Music") : "Off",
             softCount:              api.memory.has("Number of recent games") ? api.memory.get("Number of recent games") : 12,
             homeView:               api.memory.has("Home view") ? api.memory.get("Home view") : "Systems",
         }
@@ -49,10 +49,10 @@ FocusScope {
     property var softwareList: [listByLastPlayed, listByMostPlayed, listByTitle, listByPublisher]
     property int sortByIndex: api.memory.has('sortIndex') ? api.memory.get('sortIndex') : 0
     property string searchtext
-    property bool wordWrap: (settings.wordWrap === "Yes") ? true : false;
-    property bool showPercent: (settings.batteryPercentSetting === "Yes") ? true : false;
-    property bool enableDropShadows: (settings.enableDropShadows === "Yes") ? true: false;
-    property bool playBGM: (settings.playBGM === "Yes") ? true : false;
+    property bool wordWrap: (settings.wordWrap === "On") ? true : false;
+    property bool showPercent: (settings.batteryPercentSetting === "On") ? true : false;
+    property bool enableDropShadows: (settings.enableDropShadows === "On") ? true: false;
+    property bool playBGM: (settings.playBGM === "On") ? true : false;
 
     onNextCollectionChanged: { changeCollection() }
 
