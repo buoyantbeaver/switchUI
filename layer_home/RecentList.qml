@@ -272,8 +272,11 @@ ListView {
     Keys.onDownPressed: {
         _index = currentIndex;
         navSound.play();
-        // allSoftwareButton.focus = true
-        favoriteButton.focus = true
+        if (androidButton.visible) {
+            androidButton.focus = true
+        } else {
+            favoriteButton.focus = true
+        }
         recentSwitcher.currentIndex = -1
     }
 

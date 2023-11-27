@@ -21,9 +21,12 @@ See [wiki](https://github.com/RBertoCases/skylineOS/wiki) for more information.
 
 ## Version history
 
+v0.3
+- Add "Android" button in place of previously "All Software" (<i>simply an exit button</i>)
+
 v0.2
 - Changed font weight, colours and selector in Theme Settings to look closer to NS
-- Changed options from Yes/No to On/Off
+- ~~Changed options from Yes/No to On/Off~~
 - Changed font to "SF Pro Display Regular" and bumped sizes
 - Moved "All Software" back to the game row
 - Fixed the bug in Systems screen > bottom bar buttons, where if selector is right of Systems it'll skip Systems if moving to left
