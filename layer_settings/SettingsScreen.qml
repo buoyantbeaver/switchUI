@@ -435,7 +435,7 @@ id: root
                     height: settingSubtitle != "" ? parent.height + vpx(10) : parent.height
                     anchors {
                         left: parent.left; leftMargin: vpx(50)
-                        bottom: parent.bottom; bottomMargin: settingSubtitle != "" ? bottomMargin + vpx(15) : bottomMargin;
+                        bottom: parent.bottom; bottomMargin: settingSubtitle != "" ? vpx(5) : vpx(0);
                     }
                 }
 
