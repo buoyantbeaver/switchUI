@@ -285,41 +285,44 @@ FocusScope {
 
             x: parent.width/2 - buttonMenu.width/2
             
-            // MenuButton {
-            //     id: allSoftwareButton
-            //     width: vpx(86); height: vpx(100)
-            //     label: "All Software"
-            //     autoColor: false
-            //     icon: "../assets/images/allsoft_icon_blue.svg"
+            MenuButton {
+                id: androidButton
+                width: vpx(86); height: vpx(100)
+                label: "Android"
+                autoColor: false
+                icon: "../assets/images/android-robot.svg"
 
-            //     Keys.onPressed: {
-            //         if (api.keys.isAccept(event) && !event.isAutoRepeat) {
-            //             event.accepted = true;
-            //             selectSfx.play();
-            //             showSoftwareScreen();
-            //         }
-            //     }
+                Keys.onPressed: {
+                    if (api.keys.isAccept(event) && !event.isAutoRepeat) {
+                        event.accepted = true;
+                        selectSfx.play();
+                        Internal.system.quit();
+                    }
+                }
 
-            //     Keys.onLeftPressed:{
-            //         borderSfx.play();
-            //     }
+                Keys.onLeftPressed:{
+                    borderSfx.play();
+                    settingsButton.focus = true
+                }
 
-            //     Keys.onRightPressed:{
-            //         navSound.play();
-            //         favoriteButton.focus = true
-            //     }
+                Keys.onRightPressed:{
+                    navSound.play();
+                    favoriteButton.focus = true
+                }
 
-            //     onClicked: {
-            //         if (allSoftwareButton.focus) {
-            //             selectSfx.play();
-            //             showSoftwareScreen();
-            //         }
-            //         else
-            //             allSoftwareButton.focus = true;
-            //             navSound.play();
-            //             homeSwitcher.currentIndex = -1;
-            //     }
-            // }
+                onClicked: {
+                    if (androidButton.focus) {
+                        selectSfx.play();
+                        Internal.system.quit();
+                    }
+                    else
+                        androidButton.focus = true;
+                        navSound.play();
+                        recentSwitcher.currentIndex = -1;
+                }
+
+                visible: enableAndroidButton;
+            }
             
             MenuButton {
                 id: favoriteButton

@@ -25,6 +25,7 @@ FocusScope {
             wordWrap:               api.memory.has("Word Wrap on Titles") ? api.memory.get("Word Wrap on Titles") : "On",
             batteryPercentSetting:  api.memory.has("Display Battery Percentage") ? api.memory.get("Display Battery Percentage") : "Off",
             enableDropShadows:      api.memory.has("Enable DropShadows") ? api.memory.get("Enable DropShadows") : "On",
+            enableAndroidButton:    api.memory.has("Android Button") ? api.memory.get("Android Button") : "Off",
             playBGM:                api.memory.has("Background Music") ? api.memory.get("Background Music") : "Off",
             softCount:              api.memory.has("Number of recent games") ? api.memory.get("Number of recent games") : 12,
             homeView:               api.memory.has("Home view") ? api.memory.get("Home view") : "Systems",
@@ -51,7 +52,8 @@ FocusScope {
     property string searchtext
     property bool wordWrap: (settings.wordWrap === "On") ? true : false;
     property bool showPercent: (settings.batteryPercentSetting === "On") ? true : false;
-    property bool enableDropShadows: (settings.enableDropShadows === "On") ? true: false;
+    property bool enableDropShadows: (settings.enableDropShadows === "On") ? true : false;
+    property bool enableAndroidButton: (settings.enableAndroidButton === "On" && Qt.platform.os === "android") ? true : false;
     property bool playBGM: (settings.playBGM === "On") ? true : false;
 
     onNextCollectionChanged: { changeCollection() }

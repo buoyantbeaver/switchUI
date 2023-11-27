@@ -22,7 +22,9 @@ See [wiki](https://github.com/RBertoCases/skylineOS/wiki) for more information.
 ## Version history
 
 v0.3
-- Add "Android" button in place of previously "All Software" (<i>simply an exit button</i>)
+- Added "Android" button in place of previously "All Software" (<i>simply an exit button</i>)
+- Added option in Theme Settings to enable the "Android" button
+- Further beautified Theme Settings
 
 v0.2
 - Changed font weight, colours and selector in Theme Settings to look closer to NS

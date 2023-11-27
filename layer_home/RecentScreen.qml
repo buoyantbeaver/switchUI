@@ -333,7 +333,7 @@ FocusScope {
                         recentSwitcher.currentIndex = -1;
                 }
 
-                visible: Qt.platform.os === "android";
+                visible: enableAndroidButton;
             }
             
             MenuButton {

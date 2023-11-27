@@ -10,19 +10,19 @@ id: root
 
         ListElement {
             settingName: "Game Background"
-            settingSubtitle: ""
+            settingSubtitle: "Image type to use for game icons"
             setting: "Screenshot,Fanart,Boxart"
         }
 
         ListElement {
             settingName: "Background Music"
-            settingSubtitle: "(Requires Reload)"
+            settingSubtitle: "Requires Reload"
             setting: "Off,On"
         }
 
         ListElement {
             settingName: "Word Wrap on Titles"
-            settingSubtitle: "(Requires Reload)"
+            settingSubtitle: "Requires Reload"
             setting: "On,Off"
         }
         
@@ -50,12 +50,12 @@ id: root
         }
         ListElement {
             settingName: "Display Battery Percentage"
-            settingSubtitle: "(%)"
+            settingSubtitle: "Left of battery icon"
             setting: "Off,On"
         }
         ListElement {
             settingName: "Number of recent games"
-            settingSubtitle: "(default 12)"
+            settingSubtitle: "Default 12"
             setting: "8,10,12,14,16,18,20"
         }
     }
@@ -86,14 +86,9 @@ id: root
     ListModel {
         id: themeSettingsModel
         ListElement {
-            settingName: "Basic White"
-            settingSubtitle: ""
-            setting: "Basic White, Basic Black"
-        }
-        ListElement {
-            settingName: "Basic Black"
-            settingSubtitle: ""
-            setting: "Basic White, Basic Black"
+            settingName: "Android Button"
+            settingSubtitle: "Quit button from side menu that closes Pegasus Frontend app. Android only"
+            setting: "On,Off"
         }
     }
 
@@ -104,8 +99,8 @@ id: root
         }
     }
 
-    property var settingsArr: [generalPage, homePage, performancePage]
-
+    property var settingsArr: [generalPage, homePage, performancePage, themeSettingsPage]
+    
     property real itemheight: vpx(50)
 
     // Top bar
@@ -371,7 +366,7 @@ id: root
                 }
 
                 width: ListView.view.width
-                height: itemheight + vpx(10)
+                height: settingSubtitle != "" ? itemheight + vpx(25) : itemheight + vpx(10)
 
 
                 // square selector begins
@@ -427,9 +422,9 @@ id: root
 
                 // Setting name
                 Text {
-                id: settingNameText
+                    id: settingNameText
                 
-                    text: settingSubtitle != "" ? settingName + " " + settingSubtitle + ": " : settingName + ": "
+                    text: settingName
                     color: theme.text
                     font.family: titleFont.name
                     font.pixelSize: Math.round(screenheight*0.035)
@@ -437,9 +432,29 @@ id: root
                     opacity: 1
 
                     width: contentWidth
-                    height: parent.height
+                    height: settingSubtitle != "" ? parent.height + vpx(10) : parent.height
                     anchors {
                         left: parent.left; leftMargin: vpx(50)
+                        bottom: parent.bottom; bottomMargin: settingSubtitle != "" ? bottomMargin + vpx(15) : bottomMargin;
+                    }
+                }
+
+                // Setting subtitle
+                Text {
+                    id: settingSubtitleText
+                
+                    text: settingSubtitle
+                    color: theme.text
+                    font.family: titleFont.name
+                    font.pixelSize: Math.round(screenheight*0.025)
+                    verticalAlignment: Text.AlignVCenter
+                    opacity: 0.5
+
+                    width: contentWidth
+                    height: parent.height * 0.025
+                    anchors {
+                        left: parent.left; leftMargin: vpx(50)
+                        bottom: parent.bottom; bottomMargin: vpx(15)
                     }
                 }
                 // Setting value
