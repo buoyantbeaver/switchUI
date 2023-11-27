@@ -342,7 +342,11 @@ FocusScope {
                 Keys.onLeftPressed:{
                     navSound.play();
                     // allSoftwareButton.focus = true
-                    settingsButton.focus = true
+                    if (androidButton.visible) {
+                        androidButton.focus = true
+                    } else {
+                        settingsButton.focus = true
+                    }
                 }
 
                 Keys.onRightPressed:{
@@ -456,7 +460,11 @@ FocusScope {
 
                 Keys.onRightPressed:{
                     borderSfx.play();
-                    favoriteButton.focus = true
+                    if (androidButton.visible) {
+                        androidButton.focus = true
+                    } else {
+                        favoriteButton.focus = true
+                    }
                 }
                 onClicked: {
                     if (settingsButton.focus) {
