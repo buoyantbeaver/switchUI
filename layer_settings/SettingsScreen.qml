@@ -90,6 +90,11 @@ id: root
             settingSubtitle: "Quit button from side menu that closes Pegasus Frontend app. Android only"
             setting: "On,Off"
         }
+        ListElement {
+            settingName: "Profile Icon"
+            settingSubtitle: "Top left icon"
+            setting: "Pegasus,Retroid,Retroid Launcher"
+        }
     }
 
     property var themeSettingsPage: {

@@ -26,6 +26,7 @@ FocusScope {
             batteryPercentSetting:  api.memory.has("Display Battery Percentage") ? api.memory.get("Display Battery Percentage") : "Off",
             enableDropShadows:      api.memory.has("Enable DropShadows") ? api.memory.get("Enable DropShadows") : "On",
             enableAndroidButton:    api.memory.has("Android Button") ? api.memory.get("Android Button") : "Off",
+            profileIcon:      api.memory.has("Profile Icon") ? api.memory.get("Profile Icon") : "Pegasus",
             playBGM:                api.memory.has("Background Music") ? api.memory.get("Background Music") : "Off",
             softCount:              api.memory.has("Number of recent games") ? api.memory.get("Number of recent games") : 12,
             homeView:               api.memory.has("Home view") ? api.memory.get("Home view") : "Systems",

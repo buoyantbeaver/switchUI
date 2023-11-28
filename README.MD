@@ -21,6 +21,9 @@ See [wiki](https://github.com/RBertoCases/skylineOS/wiki) for more information.
 
 ## Version history
 
+v0.4
+- Added "Profile Icon" switch in Theme Settings. 3 options to choose: Pegasus, Retroid and Retroid Launcher (I just feel like that icon)
+
 v0.3
 - Added "Android" button in place of previously "All Software" (<i>simply an exit button</i>)
 - Added option in Theme Settings to enable the "Android" button

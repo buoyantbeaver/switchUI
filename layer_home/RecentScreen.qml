@@ -10,7 +10,7 @@ FocusScope {
 
     // Build the games list but with extra menu options at the start and end
     ListModel {
-    id: gamesListModel
+        id: gamesListModel
 
         property var activeCollection: listRecent.games
 
@@ -90,7 +90,7 @@ FocusScope {
                 }
                 width: Math.round(screenheight * 0.0833)
                 height: width
-                source: "../assets/images/profile_icon.png"
+                source: "../assets/images/profile_icon-" + settings.profileIcon + ".png"
                 sourceSize { width: 128; height:128 }
                 smooth: true
                 antialiasing: true
