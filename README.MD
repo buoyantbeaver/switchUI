@@ -3,14 +3,14 @@
 A clean and simple theme inspired by the experience of the Nintendo Switch for the 
 [Pegasus Frontend](http://pegasus-frontend.org/).
 
-This is a fork of [skylineOS++](https://github.com/ismaelestalayo/skylineOSP), which is a fork of skylineOS-a fork of switchOS.
+This is a fork of [skylineOS++](https://github.com/ismaelestalayo/skylineOSP), which is a fork of skylineOS-a fork of switchOS. Made for my personal use on my Retroid Pocket 3+ and tailored to my likings.
 
 
-![skylineOS Pegasus theme](assets/images/screenshot_systems.png)
+![switchUI Pegasus theme](assets/images/screenshot_systems.png)
 
-![skylineOS Pegasus theme](assets/images/screenshot_psp.png)
+![switchUI Pegasus theme](assets/images/screenshot_psp.png)
 
-![skylineOS Pegasus theme](assets/images/screenshot_recent.png)
+![switchUI Pegasus theme](assets/images/screenshot_recent.png)
 
 
 ## Installation
