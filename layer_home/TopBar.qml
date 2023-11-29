@@ -139,8 +139,7 @@ Item {
                 sourceSize.height: 64
                 smooth: true
                 horizontalAlignment: Image.AlignLeft
-                visible: true
-                // visible: chargingStatus && batteryIcon.level < 99
+                visible: chargingStatus && batteryIcon.level < 99
                 layer.enabled: true
                 layer.effect: ColorOverlay {
                                 color: theme.text
